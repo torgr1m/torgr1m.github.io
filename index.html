@@ -1,7 +1,24 @@
-<!DOCTYPE html>
 <html>
+<head>
+<title>hanson.cx</title>
+<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+
+<script>
+    $.getJSON("https://api.ipify.org?format=json",
+                                      function(data) {
+        $("#gfg").html(data.ip);
+    })
+</script>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<center>
+<h1>
+...<br>
+<a href="https://hanson.cx/eicar.com.txt">txt</a> - <a href="https://hanson.cx/eicar_com.zip">zip</a> - <a href="https://hanson.cx/pii.csv">pii</a><br>
+...<br><br></h1>
+<p id="gfg"></p>
+</center>
 </body>
 </html>
