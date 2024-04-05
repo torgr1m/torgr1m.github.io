@@ -1,1 +1,4 @@
 www.kittenwar.com
+www.proofpoint.com/phishingtesturl
+www.cisco.com
+www.totallynotaphishingsite.com
