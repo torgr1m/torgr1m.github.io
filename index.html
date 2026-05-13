@@ -1,20 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>test files</title>
-    <link rel="stylesheet" type="text/css" href="st.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hanson.cx</title>
+    <link rel="stylesheet" href="st.css">
 </head>
 <body>
-    <div class="content">
-<center>
-<h1>
-<br>
-- <a href="https://hanson.cx/eicar.com.txt">txt</a> - <a href="https://hanson.cx/eicar_com.zip">zip</a> - <a href="https://hanson.cx/pii.csv">pii</a> -<br>
-- <a href="https://hanson.cx/hamlet.txt">ai</a> -<br>
-<br><br></h1>
+    <div class="terminal">
 
-<a href="mailto:plods.06.eel@icloud.com">contact</a>
-</center>
+        <div class="block">
+            <div class="prompt">root@hanson:~$ ls -la</div>
+            <pre class="listing">total 18
+-rw-r--r--  1 root  staff      68  Jan  1 00:00  <a href="/eicar.com.txt">eicar.com.txt</a>   <span class="comment"># EICAR AV test string</span>
+-rw-r--r--  1 root  staff     184  Jan  1 00:00  <a href="/eicar_com.zip">eicar_com.zip</a>   <span class="comment"># EICAR zipped</span>
+-rw-r--r--  1 root  staff    4747  Jan  1 00:00  <a href="/pii.csv">pii.csv</a>         <span class="comment"># synthetic PII dataset</span>
+-rw-r--r--  1 root  staff   13135  Jan  1 00:00  <a href="/hamlet.txt">hamlet.txt</a>      <span class="comment"># AI canary token</span></pre>
+        </div>
+
+        <div class="block">
+            <div class="prompt">root@hanson:~$ cat links.txt</div>
+            <table class="links">
+                <tr>
+                    <td class="link-label">notskope</td>
+                    <td><a href="https://notskope.com">https://notskope.com</a></td>
+                </tr>
+                <tr>
+                    <td class="link-label">palo alto advisories</td>
+                    <td><a href="https://security.paloaltonetworks.com">https://security.paloaltonetworks.com</a></td>
+                </tr>
+                <tr>
+                    <td class="link-label">netskope advisories</td>
+                    <td><a href="https://www.netskope.com/company/security-compliance-and-assurance/security-advisories-and-disclosures">https://www.netskope.com/.../security-advisories</a></td>
+                </tr>
+                <tr>
+                    <td class="link-label">qubes os</td>
+                    <td><a href="https://www.qubes-os.org/downloads/">https://www.qubes-os.org/downloads/</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="block footer">
+            <span class="prompt">root@hanson:~$ </span><a href="mailto:plods.06.eel@icloud.com">mail plods.06.eel@icloud.com</a><span class="cursor">&#9608;</span>
+        </div>
+
     </div>
 </body>
 </html>
