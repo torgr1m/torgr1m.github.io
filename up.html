@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hanson.cx — dlp test</title>
+    <link rel="stylesheet" href="st.css">
+    <style>
+        .notice {
+            color: #555d6b;
+            margin-bottom: 2em;
+            padding-left: 1.2em;
+        }
+
+        .field-block {
+            padding-left: 1.2em;
+            margin-bottom: 1.4em;
+        }
+
+        .field-label {
+            display: block;
+            color: #4ec94e;
+            margin-bottom: 0.4em;
+        }
+
+        textarea {
+            display: block;
+            width: 100%;
+            max-width: 680px;
+            height: 140px;
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid #333;
+            color: #c9d1d9;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            padding: 10px;
+            resize: vertical;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #4ec94e;
+        }
+
+        textarea::placeholder {
+            color: #444;
+        }
+
+        .file-row {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+        }
+
+        input[type="file"] {
+            color: #c9d1d9;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="file"]::-webkit-file-upload-button {
+            background: rgba(0, 0, 0, 0.55);
+            border: 1px solid #333;
+            color: #4ec94e;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            padding: 4px 10px;
+            cursor: pointer;
+        }
+
+        input[type="file"]::-webkit-file-upload-button:hover {
+            border-color: #4ec94e;
+        }
+
+        .submit-row {
+            padding-left: 1.2em;
+            margin-top: 1.6em;
+        }
+
+        button[type="submit"] {
+            background: none;
+            border: 1px solid #4ec94e;
+            color: #4ec94e;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            padding: 6px 24px;
+            cursor: pointer;
+            letter-spacing: 0.05em;
+        }
+
+        button[type="submit"]:hover {
+            background: rgba(78, 201, 78, 0.12);
+        }
+
+        button[type="submit"]:disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
+
+        #result {
+            display: none;
+            padding-left: 1.2em;
+        }
+
+        .result-success {
+            color: #4ec94e;
+        }
+
+        .result-fail {
+            color: #ff5555;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+
+        <div class="block">
+            <div class="prompt">root@hanson:~$ # DLP test endpoint</div>
+            <div class="notice">data is not stored or processed — POST is discarded server-side</div>
+        </div>
+
+        <div class="block">
+            <div class="prompt">root@hanson:~$ curl -X POST https://hanson.cx/up.html -F data=... -F file=@...</div>
+            <form id="dlp-form" autocomplete="off">
+                <div class="field-block">
+                    <label class="field-label">&gt; data</label>
+                    <textarea name="data" placeholder="paste text, PII, tokens, credentials..."></textarea>
+                </div>
+                <div class="field-block">
+                    <label class="field-label">&gt; file</label>
+                    <div class="file-row">
+                        <input type="file" name="file">
+                    </div>
+                </div>
+                <div class="submit-row">
+                    <button type="submit">[ POST ]</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="result" class="block">
+            <div class="prompt" id="result-line"></div>
+        </div>
+
+        <div class="block footer">
+            <span class="prompt">root@hanson:~$ </span><a href="/">cd ~/</a><span class="cursor">&#9608;</span>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('dlp-form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const resultEl = document.getElementById('result');
+            const resultLine = document.getElementById('result-line');
+
+            btn.disabled = true;
+            btn.textContent = '[ ... ]';
+
+            const fd = new FormData(this);
+
+            try {
+                await fetch(window.location.href, { method: 'POST', body: fd });
+                resultLine.textContent = 'post successful';
+                resultLine.className = 'result-success';
+            } catch (err) {
+                resultLine.textContent = 'post failed: ' + err.message;
+                resultLine.className = 'result-fail';
+            }
+
+            resultEl.style.display = '';
+            btn.disabled = false;
+            btn.textContent = '[ POST ]';
+        });
+    </script>
+</body>
+</html>
