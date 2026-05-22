@@ -558,7 +558,7 @@
           </div>
 
           <div class="card" style="margin-top:8px;">
-            <div class="row"><span class="row-label">Tree Name</span><span class="row-val">The Hansons</span></div>
+            <div class="row"><span class="row-label">Tree Name</span><span class="row-val">The Torgrimssens</span></div>
           </div>
           <div class="hint">Kids will see this name when they open the app.</div>
 
@@ -640,7 +640,7 @@
           <div id="map"></div>
 
           <div class="map-top">
-            <div class="tree-pill">🌳 The Hansons</div>
+            <div class="tree-pill">🌳 The Torgrimssens</div>
             <div class="map-icon-btn">⚙️</div>
           </div>
 
@@ -753,11 +753,11 @@
             </div>
           </div>
 
-          <div class="sec-hdr">Friends · Temporary</div>
+          <div class="sec-hdr">Friends · With Us Today</div>
           <div class="card">
             <div class="row">
               <div class="member-ava" style="background:#FFF9C4;">🍋</div>
-              <div class="row-body"><div class="p">Tyler</div><div class="s">⏱ Expires in 6 h · 3 min ago</div></div>
+              <div class="row-body"><div class="p">Tyler</div><div class="s">☀️ With us today · 3 min ago</div></div>
               <span class="badge badge-friend">Friend</span>
               <span class="row-chev">›</span>
             </div>
@@ -801,11 +801,11 @@
           <div class="seg">
             <div class="seg-opt">Parent</div>
             <div class="seg-opt on">Kid</div>
-            <div class="seg-opt">Friend&nbsp;24h</div>
+            <div class="seg-opt">Friend&nbsp;Today</div>
           </div>
 
           <div style="background:#FFF3E0;border-radius:10px;padding:11px 14px;margin-bottom:16px;font-size:13px;color:#B45309;display:none;" id="friend-warn">
-            ⏱ This person's access will expire automatically 24 hours after they join.
+            ☀️ They'll be with the family for the day — access closes 24 hours after joining.
           </div>
 
           <div class="code-card">
@@ -844,8 +844,8 @@
 
           <div class="sos-card">
             <div class="lbl">Last Known Location</div>
-            <div class="val">📍 Eastside Elementary — near gym entrance</div>
-            <div class="coord">37.4560° N, 122.1420° W</div>
+            <div class="val">📍 Maplewood Park — near the picnic area</div>
+            <div class="coord">37.4495° N, 122.1485° W</div>
             <div class="map-stub">Map snapshot loading…</div>
           </div>
 
@@ -978,7 +978,7 @@ function initMap() {
 
   L.marker([37.4495,-122.1485], { icon: pin('🍋','#F9CA24','white') })
     .addTo(map)
-    .bindPopup('<b>Tyler 🍋</b><br>👤 Friend · Expires in 6h<br><small>Updated 3 min ago</small>');
+    .bindPopup('<b>Tyler 🍋</b><br>☀️ Friend · With us today<br><small>Updated 3 min ago</small>');
 
   setTimeout(() => map.invalidateSize(), 150);
 }
