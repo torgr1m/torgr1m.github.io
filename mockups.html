@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crotch Fruit — iOS Mockups</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ios-blue:      #007AFF;
+      --ios-red:       #FF3B30;
+      --ios-green:     #34C759;
+      --ios-orange:    #FF9500;
+      --ios-bg:        #F2F2F7;
+      --ios-card:      #FFFFFF;
+      --ios-label:     #000000;
+      --ios-secondary: #8E8E93;
+      --ios-sep:       rgba(60,60,67,0.18);
+      --fruit-green:   #2ECC71;
+      --phone-w:       393px;
+      --phone-h:       852px;
+    }
+
+    body {
+      background: linear-gradient(150deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 36px 20px 48px;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+      color: white;
+    }
+
+    .page-title  { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
+    .page-sub    { font-size: 13px; color: rgba(255,255,255,.5); margin-bottom: 28px; }
+
+    /* ── Top nav pills ── */
+    .screen-nav {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 20px;
+    }
+    .screen-nav button {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.75);
+      padding: 5px 13px; border-radius: 20px;
+      font-size: 12px; cursor: pointer;
+      font-family: inherit; transition: all .15s;
+    }
+    .screen-nav button:hover    { background: rgba(255,255,255,.18); }
+    .screen-nav button.active   { background: var(--ios-blue); border-color: var(--ios-blue); color: white; font-weight: 600; }
+
+    /* ── Phone + arrows ── */
+    .phone-wrap { display: flex; align-items: center; gap: 20px; }
+
+    .nav-arrow {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      color: white; width: 42px; height: 42px;
+      border-radius: 50%; font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s; flex-shrink: 0;
+    }
+    .nav-arrow:hover    { background: rgba(255,255,255,.2); }
+    .nav-arrow:disabled { opacity: .25; cursor: default; }
+
+    /* ── iPhone frame ── */
+    .phone-frame {
+      width: var(--phone-w); height: var(--phone-h);
+      background: #1C1C1E;
+      border-radius: 54px;
+      padding: 12px;
+      box-shadow:
+        0 0 0 2px #3A3A3C,
+        0 40px 80px rgba(0,0,0,.6),
+        inset 0 0 0 1px rgba(255,255,255,.08);
+      flex-shrink: 0;
+    }
+
+    .phone-screen {
+      width: 100%; height: 100%;
+      border-radius: 43px;
+      overflow: hidden;
+      background: white;
+      position: relative;
+    }
+
+    /* Dynamic Island */
+    .di {
+      position: absolute; top: 13px;
+      left: 50%; transform: translateX(-50%);
+      width: 118px; height: 34px;
+      background: #1C1C1E;
+      border-radius: 20px;
+      z-index: 200; pointer-events: none;
+    }
+
+    /* Status bar */
+    .sb {
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 54px;
+      display: flex; align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 28px 8px;
+      font-size: 15px; font-weight: 600;
+      z-index: 150; pointer-events: none;
+    }
+    .sb.dark  { color: white; }
+    .sb.light { color: black; }
+    .sb-right { display: flex; align-items: center; gap: 5px; font-size: 12px; }
+
+    /* Home indicator */
+    .hi {
+      position: absolute; bottom: 8px;
+      left: 50%; transform: translateX(-50%);
+      width: 134px; height: 5px;
+      background: rgba(0,0,0,.25);
+      border-radius: 3px; z-index: 200; pointer-events: none;
+    }
+    .hi.light { background: rgba(255,255,255,.45); }
+
+    /* ── Screens ── */
+    .screen {
+      position: absolute; inset: 0;
+      display: none; flex-direction: column;
+    }
+    .screen.active { display: flex; }
+
+    .scroller {
+      flex: 1; overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* ── Shared iOS components ── */
+    .ios-nav {
+      height: 44px; margin-top: 54px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(20px);
+      border-bottom: .5px solid var(--ios-sep);
+      display: flex; align-items: center;
+      padding: 0 16px; flex-shrink: 0;
+      position: relative;
+    }
+    .ios-nav .back {
+      color: var(--ios-blue); font-size: 16px;
+      background: none; border: none;
+      font-family: inherit; cursor: pointer;
+      display: flex; align-items: center; gap: 3px;
+      padding: 0;
+    }
+    .ios-nav .ttl {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      font-size: 17px; font-weight: 600; color: black;
+      white-space: nowrap;
+    }
+    .ios-nav .action {
+      margin-left: auto;
+      color: var(--ios-blue); font-size: 15px;
+      background: none; border: none;
+      font-family: inherit; cursor: pointer;
+    }
+
+    /* Cards / lists */
+    .card {
+      background: white; margin: 0 16px;
+      border-radius: 12px; overflow: hidden;
+      margin-bottom: 8px;
+    }
+    .row {
+      padding: 13px 16px;
+      display: flex; align-items: center; gap: 12px;
+      border-bottom: .5px solid var(--ios-sep);
+    }
+    .row:last-child { border-bottom: none; }
+    .row-icon { font-size: 18px; width: 24px; text-align: center; }
+    .row-body  { flex: 1; }
+    .row-body .p  { font-size: 15px; color: var(--ios-label); }
+    .row-body .s  { font-size: 13px; color: var(--ios-secondary); margin-top: 1px; }
+    .row-chev { color: var(--ios-sep); font-size: 14px; }
+    .row-label { font-size: 15px; color: var(--ios-label); min-width: 80px; }
+    .row-val   { flex: 1; text-align: right; color: var(--ios-secondary); font-size: 15px; }
+
+    .sec-hdr {
+      padding: 20px 16px 6px;
+      font-size: 13px; font-weight: 600; color: var(--ios-secondary);
+      text-transform: uppercase; letter-spacing: .5px;
+    }
+    .hint {
+      font-size: 13px; color: var(--ios-secondary);
+      margin: 4px 32px 16px; line-height: 1.45;
+    }
+
+    /* Buttons */
+    .btn {
+      display: block; width: calc(100% - 32px);
+      margin: 0 16px; padding: 16px;
+      border-radius: 13px; border: none;
+      font-size: 17px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+      text-align: center;
+    }
+    .btn-blue   { background: var(--ios-blue); color: white; }
+    .btn-green  { background: var(--fruit-green); color: white; }
+    .btn-gray   { background: var(--ios-bg); color: var(--ios-blue); }
+    .btn-dark   { background: #1C1C1E; color: white; }
+    .btn-red    { background: var(--ios-red); color: white; }
+
+    /* Toggle */
+    .toggle {
+      width: 51px; height: 31px;
+      background: var(--ios-green);
+      border-radius: 16px; position: relative; flex-shrink: 0;
+    }
+    .toggle::after {
+      content: '';
+      position: absolute; right: 2px; top: 2px;
+      width: 27px; height: 27px;
+      background: white; border-radius: 50%;
+      box-shadow: 0 1px 4px rgba(0,0,0,.3);
+    }
+
+    /* Step dots */
+    .steps { display: flex; gap: 6px; justify-content: center; margin: 20px 0; }
+    .step  { width: 8px; height: 8px; border-radius: 50%; background: var(--ios-sep); }
+    .step.on { background: var(--ios-blue); width: 20px; border-radius: 4px; }
+
+    /* Role badges */
+    .badge { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 8px; text-transform: uppercase; letter-spacing: .3px; flex-shrink: 0; }
+    .badge-parent { background: #E8F4FD; color: var(--ios-blue); }
+    .badge-kid    { background: #E8F8EC; color: #1E8449; }
+    .badge-friend { background: #FFF3E0; color: var(--ios-orange); }
+
+    /* ── SCREEN 1: Welcome ── */
+    #s1 {
+      background: linear-gradient(165deg, #27AE60 0%, #1E8449 60%, #145A32 100%);
+      align-items: center; justify-content: center;
+      text-align: center; color: white;
+    }
+    #s1 .logo {
+      width: 100px; height: 100px;
+      background: rgba(255,255,255,.18);
+      border-radius: 26px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 54px; margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    }
+    #s1 h1 { font-size: 34px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+    #s1 .tag { font-size: 16px; opacity: .8; line-height: 1.5; margin-bottom: 52px; padding: 0 24px; }
+    #s1 .btn-plant {
+      width: calc(100% - 48px); padding: 18px;
+      background: white; color: #1E8449;
+      border: none; border-radius: 16px;
+      font-size: 17px; font-weight: 700;
+      cursor: pointer; margin-bottom: 12px;
+      font-family: inherit;
+    }
+    #s1 .btn-join {
+      width: calc(100% - 48px); padding: 18px;
+      background: rgba(255,255,255,.18);
+      color: white;
+      border: 2px solid rgba(255,255,255,.35);
+      border-radius: 16px; font-size: 17px; font-weight: 600;
+      cursor: pointer; font-family: inherit;
+    }
+    #s1 .footer { position: absolute; bottom: 32px; font-size: 12px; opacity: .4; }
+
+    /* ── SCREEN 2: Name Tree ── */
+    #s2 { background: var(--ios-bg); }
+
+    /* ── SCREEN 3: Join Tree ── */
+    #s3 { background: var(--ios-bg); }
+    .ph-box {
+      background: white; margin: 0 16px;
+      border-radius: 13px;
+      border: 2px solid var(--ios-blue);
+      padding: 18px 20px; text-align: center;
+    }
+    .ph-code {
+      font-family: "SF Mono", "Courier New", monospace;
+      font-size: 21px; font-weight: 700;
+      color: var(--ios-blue); letter-spacing: .5px;
+      margin-bottom: 6px; display: block;
+    }
+    .ph-hint { font-size: 12px; color: var(--ios-secondary); }
+
+    .fruit-grid {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      padding: 12px 16px;
+    }
+    .fg-item {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--ios-bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; cursor: pointer;
+      border: 3px solid transparent;
+      transition: all .15s;
+    }
+    .fg-item.selected { border-color: var(--ios-blue); background: #E8F4FD; }
+
+    /* ── SCREEN 4: Map ── */
+    #s4 { background: #d9e3d3; }
+    #s4 .map-wrap { flex: 1; position: relative; }
+    #map { width: 100%; height: 100%; }
+
+    .map-top {
+      position: absolute; top: 54px; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; z-index: 400; pointer-events: none;
+    }
+    .tree-pill {
+      background: white; border-radius: 20px;
+      padding: 8px 14px; font-size: 15px; font-weight: 600;
+      box-shadow: 0 2px 10px rgba(0,0,0,.15);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .map-icon-btn {
+      background: white; width: 40px; height: 40px;
+      border-radius: 50%; display: flex; align-items: center;
+      justify-content: center; font-size: 18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.15);
+    }
+    .sos-fab {
+      position: absolute; bottom: 88px; right: 16px;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--ios-red);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 900; color: white;
+      letter-spacing: .5px;
+      box-shadow: 0 4px 14px rgba(255,59,48,.55);
+      z-index: 400; cursor: pointer;
+    }
+    .tab-bar {
+      height: 83px; background: rgba(255,255,255,.95);
+      backdrop-filter: blur(20px);
+      border-top: .5px solid var(--ios-sep);
+      display: flex; align-items: flex-start;
+      padding-top: 8px; flex-shrink: 0;
+    }
+    .tab { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; }
+    .tab-ico { font-size: 22px; line-height: 1; }
+    .tab-lbl { font-size: 10px; color: var(--ios-secondary); }
+    .tab.on .tab-lbl { color: var(--ios-blue); }
+
+    .leaflet-control-attribution { display: none !important; }
+    .leaflet-control-zoom { border-radius: 10px !important; overflow: hidden; }
+
+    /* ── SCREEN 5: Detail sheet ── */
+    #s5 { cursor: pointer; }
+    #s5 .map-dim {
+      position: absolute; inset: 0;
+      background: #c4d4bb; filter: brightness(.55);
+      z-index: 1;
+    }
+    #s5 .scrim {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.25); z-index: 2;
+    }
+    .sheet {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: white; border-radius: 20px 20px 0 0;
+      padding: 10px 20px 82px; z-index: 10;
+    }
+    .sheet-handle {
+      width: 36px; height: 4px; background: var(--ios-sep);
+      border-radius: 2px; margin: 0 auto 18px;
+    }
+    .sheet-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .sheet-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; flex-shrink: 0;
+    }
+    .sheet-name { font-size: 24px; font-weight: 700; }
+    .sheet-role { font-size: 14px; color: var(--ios-secondary); margin-top: 2px; }
+
+    /* ── SCREEN 6: Members ── */
+    #s6 { background: var(--ios-bg); }
+    .member-ava {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; flex-shrink: 0;
+    }
+
+    /* ── SCREEN 7: Invite ── */
+    #s7 { background: var(--ios-bg); }
+    .seg {
+      background: rgba(118,118,128,.12);
+      border-radius: 9px; padding: 2px;
+      display: flex; margin-bottom: 16px;
+    }
+    .seg-opt {
+      flex: 1; padding: 7px 4px;
+      text-align: center; font-size: 13px;
+      font-weight: 500; border-radius: 7px;
+      cursor: pointer; color: var(--ios-label);
+    }
+    .seg-opt.on {
+      background: white;
+      box-shadow: 0 1px 4px rgba(0,0,0,.12);
+      font-weight: 600;
+    }
+    .code-card {
+      background: white; border-radius: 16px;
+      padding: 22px; text-align: center;
+      margin-bottom: 12px;
+      border: 2px solid #2ECC71;
+    }
+    .code-lbl {
+      font-size: 11px; color: var(--ios-secondary);
+      text-transform: uppercase; letter-spacing: .6px; margin-bottom: 12px;
+    }
+    .code-txt {
+      font-family: "SF Mono", "Courier New", monospace;
+      font-size: 20px; font-weight: 700;
+      color: #1E8449; letter-spacing: .5px;
+      line-height: 1.5; margin-bottom: 16px;
+    }
+    .code-meta { font-size: 12px; color: var(--ios-secondary); line-height: 1.5; }
+    .copy-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--ios-bg); border: none;
+      border-radius: 8px; padding: 8px 16px;
+      font-size: 14px; font-weight: 600;
+      color: var(--ios-blue); cursor: pointer;
+      font-family: inherit; margin-bottom: 12px;
+    }
+
+    /* ── SCREEN 8: SOS ── */
+    #s8 { background: #130000; }
+    .sos-header {
+      background: var(--ios-red);
+      padding: 62px 24px 22px;
+      text-align: center; flex-shrink: 0;
+    }
+    .sos-header .ico   { font-size: 36px; margin-bottom: 6px; }
+    .sos-header .ttl   { font-size: 22px; font-weight: 800; color: white; }
+    .sos-header .sub   { font-size: 14px; color: rgba(255,255,255,.85); margin-top: 4px; }
+    .sos-scroll { flex: 1; overflow-y: auto; padding: 16px; }
+    .sos-card {
+      background: #2A0000; border-radius: 14px;
+      padding: 16px; margin-bottom: 12px;
+    }
+    .sos-card .lbl { font-size: 11px; color: rgba(255,100,100,.6); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
+    .sos-card .val { font-size: 15px; color: white; font-weight: 500; }
+    .sos-card .coord { font-family: monospace; font-size: 13px; color: rgba(255,255,255,.45); margin-top: 4px; }
+    .sos-who { display: flex; align-items: center; gap: 12px; }
+    .sos-ava { width: 48px; height: 48px; border-radius: 50%; background: #FFE5E5; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+    .sos-info .name { font-size: 16px; font-weight: 700; color: white; }
+    .sos-info .time { font-size: 13px; color: rgba(255,255,255,.4); margin-top: 2px; }
+    .pulse-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--ios-red);
+      box-shadow: 0 0 8px var(--ios-red);
+      animation: pdot 1.1s ease-in-out infinite;
+      margin-left: auto; flex-shrink: 0;
+    }
+    .map-stub {
+      height: 80px; background: #200000; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.2); font-size: 12px; margin-top: 10px;
+    }
+    .sos-dismiss {
+      width: 100%; padding: 17px;
+      background: var(--ios-red); color: white;
+      border: none; border-radius: 13px;
+      font-size: 17px; font-weight: 700;
+      cursor: pointer; font-family: inherit;
+      margin-bottom: 10px;
+    }
+    .sos-footer { font-size: 12px; color: rgba(255,80,80,.55); text-align: center; line-height: 1.6; }
+
+    @keyframes pdot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .4; transform: scale(1.5); }
+    }
+
+    /* ── Screen dots + label ── */
+    .screen-dots { display: flex; gap: 5px; justify-content: center; margin-top: 18px; }
+    .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,.25); cursor: pointer;
+      transition: all .2s;
+    }
+    .dot.on { background: white; width: 18px; border-radius: 3px; }
+    .screen-lbl { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,.4); text-align: center; }
+  </style>
+</head>
+<body>
+
+<div class="page-title">🍓 Crotch Fruit</div>
+<div class="page-sub">iOS mockups · 8 screens · click or use ← → keys to navigate</div>
+
+<div class="screen-nav" id="snav">
+  <button onclick="go(1)">1 · Welcome</button>
+  <button onclick="go(2)">2 · Name Tree</button>
+  <button onclick="go(3)">3 · Join Tree</button>
+  <button onclick="go(4)">4 · Map</button>
+  <button onclick="go(5)">5 · Fruit Detail</button>
+  <button onclick="go(6)">6 · Members</button>
+  <button onclick="go(7)">7 · Invite Code</button>
+  <button onclick="go(8)">8 · SOS Alert</button>
+</div>
+
+<div class="phone-wrap">
+  <button class="nav-arrow" id="pbtn" onclick="go(cur-1)" disabled>‹</button>
+
+  <div class="phone-frame">
+    <div class="di"></div>
+
+    <div class="phone-screen">
+
+      <!-- Status bar -->
+      <div class="sb light" id="sb">
+        <span>9:41</span>
+        <div class="sb-right">
+          <span style="letter-spacing:1px;">●●●●</span>
+          <span>Wi-Fi</span>
+          <span>🔋</span>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SCREEN 1 · Welcome
+      ══════════════════════════════════════ -->
+      <div class="screen active" id="s1">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px 40px;">
+          <div class="logo">🌳</div>
+          <h1>Crotch Fruit</h1>
+          <p class="tag">Always know where your little ones are — one fruit at a time.</p>
+          <button class="btn-plant" onclick="go(2)">🌳&nbsp; Plant a new Tree</button>
+          <button class="btn-join"  onclick="go(3)">Join a Tree</button>
+        </div>
+        <div class="footer">v1.0 · Family · Location</div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SCREEN 2 · Name Your Tree
+      ══════════════════════════════════════ -->
+      <div class="screen" id="s2">
+        <div class="ios-nav">
+          <button class="back" onclick="go(1)">‹ Back</button>
+          <span class="ttl">New Tree</span>
+        </div>
+        <div class="scroller" style="background:var(--ios-bg);">
+          <div style="text-align:center;padding:32px 24px 16px;">
+            <div style="font-size:48px;margin-bottom:10px;">🌳</div>
+            <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Name your Tree</div>
+            <div style="font-size:14px;color:var(--ios-secondary);line-height:1.5;">Your family's name. Everyone in your Tree will see it.</div>
+          </div>
+
+          <div class="steps">
+            <div class="step on"></div>
+            <div class="step"></div>
+          </div>
+
+          <div class="card" style="margin-top:8px;">
+            <div class="row"><span class="row-label">Tree Name</span><span class="row-val">The Hansons</span></div>
+          </div>
+          <div class="hint">Kids will see this name when they open the app.</div>
+
+          <div class="card">
+            <div class="row"><span class="row-label">Your Name</span><span class="row-val">James</span></div>
+            <div class="row" style="justify-content:space-between;">
+              <span style="font-size:15px;color:var(--ios-label);">Your Fruit</span>
+              <span style="font-size:20px;">🍎 Apple</span>
+            </div>
+          </div>
+          <div class="hint">Tap to change your fruit — must be unique in your Tree.</div>
+
+          <div style="height:20px;"></div>
+          <button class="btn btn-green" onclick="go(4)">Plant the Tree 🌱</button>
+          <div style="height:40px;"></div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SCREEN 3 · Join a Tree
+      ══════════════════════════════════════ -->
+      <div class="screen" id="s3">
+        <div class="ios-nav">
+          <button class="back" onclick="go(1)">‹ Back</button>
+          <span class="ttl">Join a Tree</span>
+        </div>
+        <div class="scroller" style="background:var(--ios-bg);">
+          <div style="text-align:center;padding:28px 24px 20px;">
+            <div style="font-size:52px;margin-bottom:12px;">🍃</div>
+            <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Enter your invite code</div>
+            <div style="font-size:14px;color:var(--ios-secondary);line-height:1.5;">Ask a parent to generate a code from their app. Each code works exactly once.</div>
+          </div>
+
+          <div class="ph-box">
+            <span class="ph-code">horse-battery-staple-banana</span>
+            <div class="ph-hint">4-word passphrase · tap to edit</div>
+          </div>
+
+          <div class="card" style="margin-top:16px;">
+            <div class="row">
+              <div class="row-body">
+                <div class="p">Joining as</div>
+                <div class="s">Set by the parent who created this code</div>
+              </div>
+              <span style="font-size:15px;font-weight:600;">🧒 Kid</span>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="row"><span class="row-label">Your Name</span><span class="row-val">Emma</span></div>
+            <div style="padding:10px 16px 14px;">
+              <div style="font-size:13px;color:var(--ios-secondary);margin-bottom:8px;">Pick your fruit</div>
+              <div class="fruit-grid" style="padding:0;">
+                <div class="fg-item selected">🍓</div>
+                <div class="fg-item">🍐</div>
+                <div class="fg-item">🫐</div>
+                <div class="fg-item">🍊</div>
+                <div class="fg-item">🍋</div>
+                <div class="fg-item">🍎</div>
+                <div class="fg-item">🍑</div>
+                <div class="fg-item">🥝</div>
+                <div class="fg-item">🍍</div>
+                <div class="fg-item">🍇</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height:20px;"></div>
+          <button class="btn btn-blue" onclick="go(4)">Join the Tree 🌳</button>
+          <div style="height:40px;"></div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SCREEN 4 · Main Map
+      ══════════════════════════════════════ -->
+      <div class="screen" id="s4">
+        <div class="map-wrap">
+          <div id="map"></div>
+
+          <div class="map-top">
+            <div class="tree-pill">🌳 The Hansons</div>
+            <div class="map-icon-btn">⚙️</div>
+          </div>
+
+          <div class="sos-fab" onclick="go(8)">SOS</div>
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab on">
+            <div class="tab-ico">🗺️</div>
+            <div class="tab-lbl">Map</div>
+          </div>
+          <div class="tab" onclick="go(6)">
+            <div class="tab-ico">👨‍👩‍👧‍👦</div>
+            <div class="tab-lbl">Members</div>
+          </div>
+          <div class="tab" onclick="go(7)">
+            <div class="tab-ico">➕</div>
+            <div class="tab-lbl">Invite</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SCREEN 5 · Fruit Detail Sheet
+      ══════════════════════════════════════ -->
+      <div class="screen" id="s5" onclick="go(4)">
+        <div class="map-dim"></div>
+        <div class="scrim"></div>
+
+        <div class="sheet" onclick="event.stopPropagation()">
+          <div class="sheet-handle"></div>
+          <div class="sheet-header">
+            <div class="sheet-avatar" style="background:#FFE5E5;">🍓</div>
+            <div>
+              <div class="sheet-name">Emma</div>
+              <div class="sheet-role">Kid · Strawberry</div>
+            </div>
+          </div>
+
+          <div class="card" style="margin:0 0 10px;">
+            <div class="row">
+              <div class="row-icon">📍</div>
+              <div class="row-body"><div class="p">Eastside Elementary</div><div class="s">Inside named place · safe zone</div></div>
+            </div>
+            <div class="row">
+              <div class="row-icon">🕐</div>
+              <div class="row-body"><div class="p">Updated 2 min ago</div><div class="s">Next update ~3 min</div></div>
+            </div>
+            <div class="row">
+              <div class="row-icon">🏠</div>
+              <div class="row-body"><div class="p">1.2 mi from Home</div><div class="s">Typical school day location</div></div>
+            </div>
+          </div>
+
+          <div class="card" style="margin:0 0 14px;">
+            <div class="row">
+              <div class="row-icon">🔔</div>
+              <div class="row-body"><div class="p">Arrive / Leave Alerts</div><div class="s">Notify when Emma enters or leaves this place</div></div>
+              <div class="toggle"></div>
+            </div>
+          </div>
+
+          <div style="text-align:center;font-size:13px;color:var(--ios-secondary);">Tap outside to dismiss</div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SCREEN 6 · Members
+      ══════════════════════════════════════ -->
+      <div class="screen" id="s6">
+        <div class="ios-nav">
+          <button class="back" onclick="go(4)">‹ Map</button>
+          <span class="ttl">Members</span>
+          <button class="action" onclick="go(7)">+ Invite</button>
+        </div>
+        <div class="scroller" style="background:var(--ios-bg);">
+
+          <div class="sec-hdr">Parents</div>
+          <div class="card">
+            <div class="row">
+              <div class="member-ava" style="background:#E8F5E9;">🍎</div>
+              <div class="row-body">
+                <div class="p">James <span style="color:var(--ios-secondary);font-size:12px;">(you)</span></div>
+                <div class="s">Active now</div>
+              </div>
+              <span class="badge badge-parent">Parent</span>
+              <span class="row-chev">›</span>
+            </div>
+            <div class="row">
+              <div class="member-ava" style="background:#FFF3E0;">🍑</div>
+              <div class="row-body"><div class="p">Sarah</div><div class="s">Active now</div></div>
+              <span class="badge badge-parent">Parent</span>
+              <span class="row-chev">›</span>
+            </div>
+          </div>
+
+          <div class="sec-hdr">Kids</div>
+          <div class="card">
+            <div class="row" onclick="go(5)" style="cursor:pointer;">
+              <div class="member-ava" style="background:#FFE5E5;">🍓</div>
+              <div class="row-body"><div class="p">Emma</div><div class="s">📍 Eastside Elementary · 2 min ago</div></div>
+              <span class="badge badge-kid">Kid</span>
+              <span class="row-chev">›</span>
+            </div>
+            <div class="row">
+              <div class="member-ava" style="background:#EAE5FF;">🫐</div>
+              <div class="row-body"><div class="p">Jake</div><div class="s">📍 Home · 8 min ago</div></div>
+              <span class="badge badge-kid">Kid</span>
+              <span class="row-chev">›</span>
+            </div>
+          </div>
+
+          <div class="sec-hdr">Friends · Temporary</div>
+          <div class="card">
+            <div class="row">
+              <div class="member-ava" style="background:#FFF9C4;">🍋</div>
+              <div class="row-body"><div class="p">Tyler</div><div class="s">⏱ Expires in 6 h · 3 min ago</div></div>
+              <span class="badge badge-friend">Friend</span>
+              <span class="row-chev">›</span>
+            </div>
+          </div>
+
+          <div class="sec-hdr">Pending Invites</div>
+          <div class="card">
+            <div class="row" style="opacity:.6;">
+              <div class="member-ava" style="background:var(--ios-bg);font-size:20px;">🎟️</div>
+              <div class="row-body">
+                <div class="p">Kid invite</div>
+                <div class="s">Generated today · unredeemed</div>
+              </div>
+              <span style="font-size:13px;color:var(--ios-red);font-weight:500;">Revoke</span>
+            </div>
+          </div>
+
+          <div style="height:16px;"></div>
+          <button class="btn btn-blue" onclick="go(7)">➕&nbsp; Invite Someone</button>
+          <div style="height:36px;"></div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SCREEN 7 · Generate Invite Code
+      ══════════════════════════════════════ -->
+      <div class="screen" id="s7">
+        <div class="ios-nav">
+          <button class="back" onclick="go(6)">‹ Members</button>
+          <span class="ttl">Invite</span>
+        </div>
+        <div class="scroller" style="background:var(--ios-bg);padding:0 16px;">
+
+          <div style="text-align:center;padding:28px 16px 20px;">
+            <div style="font-size:52px;margin-bottom:10px;">🎟️</div>
+            <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Invite someone</div>
+            <div style="font-size:14px;color:var(--ios-secondary);line-height:1.5;">Choose their role, then share the code.<br>Each code works exactly once and burns on redemption.</div>
+          </div>
+
+          <div style="font-size:13px;font-weight:600;color:var(--ios-secondary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Role</div>
+          <div class="seg">
+            <div class="seg-opt">Parent</div>
+            <div class="seg-opt on">Kid</div>
+            <div class="seg-opt">Friend&nbsp;24h</div>
+          </div>
+
+          <div style="background:#FFF3E0;border-radius:10px;padding:11px 14px;margin-bottom:16px;font-size:13px;color:#B45309;display:none;" id="friend-warn">
+            ⏱ This person's access will expire automatically 24 hours after they join.
+          </div>
+
+          <div class="code-card">
+            <div class="code-lbl">One-time invite code</div>
+            <div class="code-txt">horse-battery<br>staple-banana</div>
+            <button class="copy-btn">📋&nbsp; Copy</button>
+            <div class="code-meta">Single-use · burns on redemption<br>Valid until redeemed or revoked by a parent</div>
+          </div>
+
+          <button class="btn btn-gray" style="margin-bottom:10px;">🔄&nbsp; Generate New Code</button>
+          <button class="btn btn-dark" style="margin-bottom:28px;">📤&nbsp; Share…</button>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           SCREEN 8 · SOS Alert (Parent view)
+      ══════════════════════════════════════ -->
+      <div class="screen" id="s8">
+        <div class="sos-header">
+          <div class="ico">🚨</div>
+          <div class="ttl">SOS Alert</div>
+          <div class="sub">Emma has triggered an emergency alert</div>
+        </div>
+
+        <div class="sos-scroll">
+          <div class="sos-card">
+            <div class="sos-who">
+              <div class="sos-ava">🍓</div>
+              <div class="sos-info">
+                <div class="name">Emma</div>
+                <div class="time">Triggered 0:23 ago · 3:47 PM</div>
+              </div>
+              <div class="pulse-dot"></div>
+            </div>
+          </div>
+
+          <div class="sos-card">
+            <div class="lbl">Last Known Location</div>
+            <div class="val">📍 Eastside Elementary — near gym entrance</div>
+            <div class="coord">37.4560° N, 122.1420° W</div>
+            <div class="map-stub">Map snapshot loading…</div>
+          </div>
+
+          <button class="sos-dismiss" onclick="go(4)">✓&nbsp; Acknowledge &amp; Dismiss</button>
+          <div class="sos-footer">All parents have been notified.<br>Alert stays active until a parent dismisses it.</div>
+          <div style="height:32px;"></div>
+        </div>
+      </div>
+
+      <div class="hi" id="hi"></div>
+    </div>
+  </div>
+
+  <button class="nav-arrow" id="nbtn" onclick="go(cur+1)">›</button>
+</div>
+
+<div class="screen-dots" id="dots"></div>
+<div class="screen-lbl"  id="lbl"></div>
+
+<script>
+const SCREENS = [
+  { n:1, lbl:"Welcome" },
+  { n:2, lbl:"Name Your Tree" },
+  { n:3, lbl:"Join a Tree (enter passphrase + pick fruit)" },
+  { n:4, lbl:"Main Map" },
+  { n:5, lbl:"Fruit Detail Sheet (tap outside to close)" },
+  { n:6, lbl:"Members List — tap Emma to see detail" },
+  { n:7, lbl:"Generate Invite Code" },
+  { n:8, lbl:"SOS Alert — Parent View" },
+];
+
+let cur = 1;
+let mapReady = false;
+
+function buildDots() {
+  const c = document.getElementById('dots');
+  c.innerHTML = '';
+  SCREENS.forEach((s,i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i+1===cur ? ' on' : '');
+    d.onclick = () => go(s.n);
+    c.appendChild(d);
+  });
+}
+
+function go(n) {
+  if (n < 1 || n > SCREENS.length) return;
+  document.getElementById('s'+cur).classList.remove('active');
+  cur = n;
+  document.getElementById('s'+cur).classList.add('active');
+
+  if (cur === 4) setTimeout(initMap, 60);
+
+  // Status bar & home indicator colour
+  const dark = cur === 1 || cur === 8;
+  document.getElementById('sb').className = 'sb ' + (dark ? 'dark' : 'light');
+  document.getElementById('hi').className  = 'hi ' + (dark ? 'light' : '');
+
+  // Nav pills
+  document.querySelectorAll('#snav button').forEach((b,i) => {
+    b.classList.toggle('active', i+1 === cur);
+  });
+
+  document.getElementById('pbtn').disabled = cur === 1;
+  document.getElementById('nbtn').disabled = cur === SCREENS.length;
+
+  document.getElementById('lbl').textContent =
+    `Screen ${cur} of ${SCREENS.length} — ${SCREENS[cur-1].lbl}`;
+
+  buildDots();
+}
+
+function initMap() {
+  if (mapReady) return;
+  mapReady = true;
+
+  const map = L.map('map', {
+    center: [37.4519, -122.1510],
+    zoom: 14,
+    zoomControl: true,
+    attributionControl: false,
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    { maxZoom: 19 }).addTo(map);
+
+  function pin(emoji, bg, border) {
+    return L.divIcon({
+      className: '',
+      html: `<div style="width:50px;height:50px;border-radius:50%;
+        background:${bg};border:3px solid ${border};
+        display:flex;align-items:center;justify-content:center;
+        font-size:26px;box-shadow:0 3px 12px rgba(0,0,0,.3);
+        cursor:pointer;">${emoji}</div>`,
+      iconSize:[50,50], iconAnchor:[25,25], popupAnchor:[0,-30],
+    });
+  }
+
+  function homePinIcon() {
+    return L.divIcon({
+      className: '',
+      html: `<div style="width:42px;height:42px;border-radius:50%;
+        background:#FFFDE7;border:3px solid #FDD835;
+        display:flex;align-items:center;justify-content:center;
+        font-size:20px;box-shadow:0 2px 8px rgba(0,0,0,.2);">🏠</div>`,
+      iconSize:[42,42], iconAnchor:[21,21],
+    });
+  }
+
+  // Named place circles
+  L.circle([37.4560, -122.1420], { radius:120, color:'#FF4757', fillColor:'#FF4757', fillOpacity:.07, weight:2, dashArray:'6,4' }).addTo(map);
+  L.circle([37.4480, -122.1620], { radius:100, color:'#FDD835', fillColor:'#FDD835', fillOpacity:.1,  weight:2, dashArray:'6,4' }).addTo(map);
+
+  // Markers
+  L.marker([37.4480,-122.1620], { icon: homePinIcon() })
+    .addTo(map).bindPopup('🏠 Home');
+
+  L.marker([37.4560,-122.1420], { icon: pin('🍓','#FF4757','white') })
+    .addTo(map)
+    .bindPopup('<b>Emma 🍓</b><br>📍 Eastside Elementary<br><small>Updated 2 min ago</small>')
+    .openPopup();
+
+  L.marker([37.4480,-122.1620], { icon: pin('🫐','#5352ED','white') })
+    .addTo(map)
+    .bindPopup('<b>Jake 🫐</b><br>📍 Home<br><small>Updated 8 min ago</small>');
+
+  L.marker([37.4510,-122.1530], { icon: pin('🍐','#7BED9F','white') })
+    .addTo(map)
+    .bindPopup('<b>Lily 🍐</b><br>📍 En route<br><small>Updated 5 min ago</small>');
+
+  L.marker([37.4495,-122.1485], { icon: pin('🍋','#F9CA24','white') })
+    .addTo(map)
+    .bindPopup('<b>Tyler 🍋</b><br>👤 Friend · Expires in 6h<br><small>Updated 3 min ago</small>');
+
+  setTimeout(() => map.invalidateSize(), 150);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') go(cur+1);
+  if (e.key === 'ArrowLeft')  go(cur-1);
+});
+
+go(1);
+</script>
+</body>
+</html>
