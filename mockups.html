@@ -264,6 +264,40 @@
     .code-txt { font-family: "SF Mono", "Courier New", monospace; font-size: 20px; font-weight: 700; color: #1E8449; letter-spacing: .5px; line-height: 1.5; margin-bottom: 16px; }
     .code-meta { font-size: 12px; color: var(--ios-secondary); line-height: 1.5; }
     .copy-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--ios-bg); border: none; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 600; color: var(--ios-blue); cursor: pointer; font-family: inherit; margin-bottom: 12px; }
+    .code-countdown {
+      font-size: 13px; color: #B45309; font-weight: 600;
+      margin-bottom: 10px; padding: 6px 14px;
+      background: #FFF3E0; border-radius: 16px;
+      display: inline-block;
+    }
+    .code-countdown strong { font-family: "SF Mono", "Courier New", monospace; letter-spacing: .5px; }
+
+    /* ── SCREEN 18: Location Permission Pre-prompt ── */
+    #s18 {
+      background: linear-gradient(165deg, #27AE60 0%, #1E8449 60%, #145A32 100%);
+      color: white; text-align: center;
+    }
+    .perm-content {
+      flex: 1; display: flex; flex-direction: column; align-items: center;
+      padding: 80px 28px 32px; overflow-y: auto;
+    }
+    .perm-ico  { font-size: 64px; margin-bottom: 16px; line-height: 1; }
+    .perm-ttl  { font-size: 26px; font-weight: 800; margin-bottom: 12px; letter-spacing: -.5px; }
+    .perm-body { font-size: 15px; opacity: .9; line-height: 1.5; margin-bottom: 28px; padding: 0 4px; }
+    .perm-feature {
+      background: rgba(255,255,255,.15); border-radius: 14px;
+      padding: 14px 16px; margin-bottom: 10px; text-align: left;
+      display: flex; align-items: center; gap: 14px; width: 100%;
+    }
+    .perm-feature .ico { font-size: 26px; flex-shrink: 0; }
+    .perm-feature .ttl { font-size: 14px; font-weight: 700; }
+    .perm-feature .sub { font-size: 12px; opacity: .8; line-height: 1.4; margin-top: 2px; }
+    .perm-cta {
+      width: 100%; padding: 18px; background: white; color: #1E8449;
+      border: none; border-radius: 16px; font-size: 17px; font-weight: 700;
+      cursor: pointer; font-family: inherit; margin-top: 18px; margin-bottom: 14px;
+    }
+    .perm-note { font-size: 11px; opacity: .7; line-height: 1.5; padding: 0 8px; }
 
     /* ── SCREEN 8: SOS Parent ── */
     #s8 { background: #130000; }
@@ -552,7 +586,7 @@
 <body>
 
 <div class="page-title">🍓 Crotch Fruit</div>
-<div class="page-sub">iOS mockups · 17 screens · click or use ← → keys to navigate</div>
+<div class="page-sub">iOS mockups · 18 screens · click or use ← → keys to navigate</div>
 
 <div class="screen-nav" id="snav">
   <button onclick="go(1)">1 · Welcome</button>
@@ -572,6 +606,7 @@
   <button onclick="go(15)">15 · Friend Warning</button>
   <button onclick="go(16)">16 · Extend Visit</button>
   <button onclick="go(17)">17 · Friend Farewell</button>
+  <button onclick="go(18)">18 · Location Permission</button>
 </div>
 
 <div class="phone-wrap">
@@ -624,7 +659,7 @@
           </div>
           <div class="hint">Tap to change your fruit — must be unique in your Tree.</div>
           <div style="height:20px;"></div>
-          <button class="btn btn-green" onclick="go(4)">Plant the Tree 🌱</button>
+          <button class="btn btn-green" onclick="go(18)">Plant the Tree 🌱</button>
           <div style="height:40px;"></div>
         </div>
       </div>
@@ -749,7 +784,7 @@
           <div class="card">
             <div class="row" onclick="go(15)" style="cursor:pointer;">
               <div class="member-ava" style="background:#FFF9C4;">🍋</div>
-              <div class="row-body"><div class="p">Tyler</div><div class="s">☀️ With us today · 3 min ago</div></div>
+              <div class="row-body"><div class="p">Tyler</div><div class="s">☀️ With us today · 🕐 Last check-in 35 min ago</div></div>
               <span class="badge badge-friend">Friend</span><span class="row-chev">›</span>
             </div>
           </div>
@@ -789,7 +824,8 @@
             <div class="code-lbl">One-time invite code</div>
             <div class="code-txt">horse-battery<br>staple-banana</div>
             <button class="copy-btn">📋&nbsp; Copy</button>
-            <div class="code-meta">Single-use · burns on redemption<br>Valid until redeemed or revoked by a parent</div>
+            <div class="code-countdown">⏱ Expires in <strong>59:42</strong></div>
+            <div class="code-meta">Single-use · burns on redemption<br>Auto-expires 1 hour after generation</div>
           </div>
           <button class="btn btn-gray" style="margin-bottom:10px;">🔄&nbsp; Generate New Code</button>
           <button class="btn btn-dark" style="margin-bottom:28px;">📤&nbsp; Share…</button>
@@ -800,8 +836,8 @@
       <div class="screen" id="s8">
         <div class="sos-header">
           <div class="ico">🚨</div>
-          <div class="ttl">SOS Alert</div>
-          <div class="sub">Emma has triggered an emergency alert</div>
+          <div class="ttl">Emma needs help!</div>
+          <div class="sub">SOS alert · tap to see her location</div>
         </div>
         <div class="sos-scroll">
           <div class="sos-card">
@@ -814,7 +850,7 @@
           <div class="sos-card">
             <div class="lbl">Last Known Location</div>
             <div class="val">📍 Maplewood Park — near the picnic area</div>
-            <div class="coord">37.4495° N, 122.1485° W</div>
+            <div class="coord">37.4533° N, 122.1567° W</div>
             <div class="map-stub">Map snapshot loading…</div>
           </div>
           <button class="sos-dismiss" onclick="go(4)">✓&nbsp; Acknowledge &amp; Dismiss</button>
@@ -1007,7 +1043,7 @@
           <div class="welcome-ttl">Welcome to</div>
           <div class="welcome-name">The Torgrimssens!</div>
           <div class="welcome-sub">Your family can now see where you are. You can see them too.</div>
-          <button class="welcome-cta" onclick="go(14)">Let's go! →</button>
+          <button class="welcome-cta" onclick="go(18)">Let's go! →</button>
         </div>
       </div>
 
@@ -1055,8 +1091,8 @@
           <div class="sheet-handle" style="margin-bottom:16px;"></div>
           <div class="warn-body">
             <div class="warn-ico">☀️</div>
-            <div class="warn-msg">Only 2 more hours<br>with 🍋 Tyler</div>
-            <div class="warn-sub">Tyler's visit ends at 5:45 PM.<br>Generate a new code to keep him a bit longer.</div>
+            <div class="warn-msg">Only 1 more hour<br>with 🍋 Tyler</div>
+            <div class="warn-sub">Tyler's visit ends at 5:45 PM.<br>Tap Extend to keep him a bit longer.</div>
           </div>
           <button class="warn-extend" onclick="go(16)">Extend Visit</button>
           <button class="warn-dismiss" onclick="go(4)">Not now</button>
@@ -1109,6 +1145,42 @@
         </div>
       </div>
 
+      <!-- ══ S18 · Location Permission Pre-prompt ══ -->
+      <div class="screen" id="s18">
+        <div class="perm-content">
+          <div class="perm-ico">📍</div>
+          <div class="perm-ttl">Stay close to your family</div>
+          <div class="perm-body">Crotch Fruit shares your location so your Tree always knows where you are — including when the app isn't open. We use the most battery-efficient method available.</div>
+
+          <div class="perm-feature">
+            <div class="ico">🔋</div>
+            <div>
+              <div class="ttl">Battery-friendly</div>
+              <div class="sub">We only check when you actually move</div>
+            </div>
+          </div>
+
+          <div class="perm-feature">
+            <div class="ico">🔒</div>
+            <div>
+              <div class="ttl">Private</div>
+              <div class="sub">Only your Tree sees you. No ads, no third parties.</div>
+            </div>
+          </div>
+
+          <div class="perm-feature">
+            <div class="ico">📍</div>
+            <div>
+              <div class="ttl">Always-on</div>
+              <div class="sub">Updates even when the app is closed, so SOS works anytime</div>
+            </div>
+          </div>
+
+          <button class="perm-cta" onclick="go(4)">Continue →</button>
+          <div class="perm-note">Apple will ask you next to choose <strong>"Allow While Using App"</strong> then <strong>"Change to Always Allow"</strong> for the best experience.</div>
+        </div>
+      </div>
+
       <div class="hi" id="hi"></div>
     </div>
   </div>
@@ -1147,6 +1219,7 @@ const SCREENS = [
   { n:15, lbl:"Friend Warning — tap Tyler in Members to reach this" },
   { n:16, lbl:"Extend Visit Sheet" },
   { n:17, lbl:"Friend Farewell Screen" },
+  { n:18, lbl:"Location Permission Pre-prompt — shown after planting / joining a Tree" },
 ];
 
 let cur = 1;
@@ -1171,7 +1244,7 @@ function go(n) {
 
   if (cur === 4) setTimeout(initMap, 60);
 
-  const dark = [1, 8, 12, 13, 17].includes(cur);
+  const dark = [1, 8, 12, 13, 17, 18].includes(cur);
   document.getElementById('sb').className  = 'sb ' + (dark ? 'dark' : 'light');
   document.getElementById('hi').className  = 'hi ' + (dark ? 'light' : '');
 
@@ -1245,7 +1318,7 @@ function initMap() {
 
   // Tyler — stale pin (greyscale + clock badge)
   L.marker([37.4495,-122.1485],{icon:stalePin('🍋')}).addTo(map)
-    .bindPopup('<b>Tyler 🍋</b><br>☀️ Friend · With us today<br><small>⚠️ Last update 22 min ago</small>');
+    .bindPopup('<b>Tyler 🍋</b><br>☀️ Friend · With us today<br><small>🕐 Last check-in 35 min ago</small>');
 
   setTimeout(() => map.invalidateSize(), 150);
 }
