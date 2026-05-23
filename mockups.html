@@ -38,23 +38,21 @@
     .page-title  { font-size: 26px; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
     .page-sub    { font-size: 13px; color: rgba(255,255,255,.5); margin-bottom: 28px; }
 
-    /* ── Top nav pills ── */
     .screen-nav {
-      display: flex; gap: 6px; flex-wrap: wrap;
-      justify-content: center; margin-bottom: 20px;
+      display: flex; gap: 5px; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 20px; max-width: 900px;
     }
     .screen-nav button {
       background: rgba(255,255,255,.08);
       border: 1px solid rgba(255,255,255,.15);
       color: rgba(255,255,255,.75);
-      padding: 5px 13px; border-radius: 20px;
-      font-size: 12px; cursor: pointer;
+      padding: 4px 11px; border-radius: 20px;
+      font-size: 11px; cursor: pointer;
       font-family: inherit; transition: all .15s;
     }
     .screen-nav button:hover    { background: rgba(255,255,255,.18); }
     .screen-nav button.active   { background: var(--ios-blue); border-color: var(--ios-blue); color: white; font-weight: 600; }
 
-    /* ── Phone + arrows ── */
     .phone-wrap { display: flex; align-items: center; gap: 20px; }
 
     .nav-arrow {
@@ -68,259 +66,154 @@
     .nav-arrow:hover    { background: rgba(255,255,255,.2); }
     .nav-arrow:disabled { opacity: .25; cursor: default; }
 
-    /* ── iPhone frame ── */
     .phone-frame {
       width: var(--phone-w); height: var(--phone-h);
-      background: #1C1C1E;
-      border-radius: 54px;
-      padding: 12px;
-      box-shadow:
-        0 0 0 2px #3A3A3C,
-        0 40px 80px rgba(0,0,0,.6),
+      background: #1C1C1E; border-radius: 54px; padding: 12px;
+      box-shadow: 0 0 0 2px #3A3A3C, 0 40px 80px rgba(0,0,0,.6),
         inset 0 0 0 1px rgba(255,255,255,.08);
       flex-shrink: 0;
     }
-
     .phone-screen {
-      width: 100%; height: 100%;
-      border-radius: 43px;
-      overflow: hidden;
-      background: white;
-      position: relative;
+      width: 100%; height: 100%; border-radius: 43px;
+      overflow: hidden; background: white; position: relative;
     }
-
-    /* Dynamic Island */
     .di {
       position: absolute; top: 13px;
       left: 50%; transform: translateX(-50%);
-      width: 118px; height: 34px;
-      background: #1C1C1E;
-      border-radius: 20px;
-      z-index: 200; pointer-events: none;
+      width: 118px; height: 34px; background: #1C1C1E;
+      border-radius: 20px; z-index: 200; pointer-events: none;
     }
-
-    /* Status bar */
     .sb {
-      position: absolute; top: 0; left: 0; right: 0;
-      height: 54px;
-      display: flex; align-items: flex-end;
-      justify-content: space-between;
-      padding: 0 28px 8px;
-      font-size: 15px; font-weight: 600;
+      position: absolute; top: 0; left: 0; right: 0; height: 54px;
+      display: flex; align-items: flex-end; justify-content: space-between;
+      padding: 0 28px 8px; font-size: 15px; font-weight: 600;
       z-index: 150; pointer-events: none;
     }
     .sb.dark  { color: white; }
     .sb.light { color: black; }
     .sb-right { display: flex; align-items: center; gap: 5px; font-size: 12px; }
-
-    /* Home indicator */
     .hi {
       position: absolute; bottom: 8px;
       left: 50%; transform: translateX(-50%);
-      width: 134px; height: 5px;
-      background: rgba(0,0,0,.25);
+      width: 134px; height: 5px; background: rgba(0,0,0,.25);
       border-radius: 3px; z-index: 200; pointer-events: none;
     }
     .hi.light { background: rgba(255,255,255,.45); }
 
     /* ── Screens ── */
-    .screen {
-      position: absolute; inset: 0;
-      display: none; flex-direction: column;
-    }
+    .screen { position: absolute; inset: 0; display: none; flex-direction: column; }
     .screen.active { display: flex; }
-
-    .scroller {
-      flex: 1; overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
+    .scroller { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 
     /* ── Shared iOS components ── */
     .ios-nav {
       height: 44px; margin-top: 54px;
-      background: rgba(255,255,255,.92);
-      backdrop-filter: blur(20px);
+      background: rgba(255,255,255,.92); backdrop-filter: blur(20px);
       border-bottom: .5px solid var(--ios-sep);
       display: flex; align-items: center;
-      padding: 0 16px; flex-shrink: 0;
-      position: relative;
+      padding: 0 16px; flex-shrink: 0; position: relative;
     }
     .ios-nav .back {
       color: var(--ios-blue); font-size: 16px;
-      background: none; border: none;
-      font-family: inherit; cursor: pointer;
-      display: flex; align-items: center; gap: 3px;
-      padding: 0;
+      background: none; border: none; font-family: inherit;
+      cursor: pointer; display: flex; align-items: center; gap: 3px; padding: 0;
     }
     .ios-nav .ttl {
       position: absolute; left: 50%; transform: translateX(-50%);
-      font-size: 17px; font-weight: 600; color: black;
-      white-space: nowrap;
+      font-size: 17px; font-weight: 600; color: black; white-space: nowrap;
     }
     .ios-nav .action {
-      margin-left: auto;
-      color: var(--ios-blue); font-size: 15px;
-      background: none; border: none;
-      font-family: inherit; cursor: pointer;
+      margin-left: auto; color: var(--ios-blue); font-size: 15px;
+      background: none; border: none; font-family: inherit; cursor: pointer;
     }
 
-    /* Cards / lists */
-    .card {
-      background: white; margin: 0 16px;
-      border-radius: 12px; overflow: hidden;
-      margin-bottom: 8px;
-    }
+    .card { background: white; margin: 0 16px; border-radius: 12px; overflow: hidden; margin-bottom: 8px; }
     .row {
-      padding: 13px 16px;
-      display: flex; align-items: center; gap: 12px;
+      padding: 13px 16px; display: flex; align-items: center; gap: 12px;
       border-bottom: .5px solid var(--ios-sep);
     }
     .row:last-child { border-bottom: none; }
     .row-icon { font-size: 18px; width: 24px; text-align: center; }
-    .row-body  { flex: 1; }
-    .row-body .p  { font-size: 15px; color: var(--ios-label); }
-    .row-body .s  { font-size: 13px; color: var(--ios-secondary); margin-top: 1px; }
-    .row-chev { color: var(--ios-sep); font-size: 14px; }
-    .row-label { font-size: 15px; color: var(--ios-label); min-width: 80px; }
-    .row-val   { flex: 1; text-align: right; color: var(--ios-secondary); font-size: 15px; }
-
+    .row-body { flex: 1; }
+    .row-body .p { font-size: 15px; color: var(--ios-label); }
+    .row-body .s { font-size: 13px; color: var(--ios-secondary); margin-top: 1px; }
+    .row-chev    { color: var(--ios-sep); font-size: 14px; }
+    .row-label   { font-size: 15px; color: var(--ios-label); min-width: 80px; }
+    .row-val     { flex: 1; text-align: right; color: var(--ios-secondary); font-size: 15px; }
     .sec-hdr {
       padding: 20px 16px 6px;
       font-size: 13px; font-weight: 600; color: var(--ios-secondary);
       text-transform: uppercase; letter-spacing: .5px;
     }
-    .hint {
-      font-size: 13px; color: var(--ios-secondary);
-      margin: 4px 32px 16px; line-height: 1.45;
-    }
+    .hint { font-size: 13px; color: var(--ios-secondary); margin: 4px 32px 16px; line-height: 1.45; }
 
-    /* Buttons */
     .btn {
-      display: block; width: calc(100% - 32px);
-      margin: 0 16px; padding: 16px;
-      border-radius: 13px; border: none;
-      font-size: 17px; font-weight: 600;
-      cursor: pointer; font-family: inherit;
-      text-align: center;
+      display: block; width: calc(100% - 32px); margin: 0 16px; padding: 16px;
+      border-radius: 13px; border: none; font-size: 17px; font-weight: 600;
+      cursor: pointer; font-family: inherit; text-align: center;
     }
-    .btn-blue   { background: var(--ios-blue); color: white; }
-    .btn-green  { background: var(--fruit-green); color: white; }
-    .btn-gray   { background: var(--ios-bg); color: var(--ios-blue); }
-    .btn-dark   { background: #1C1C1E; color: white; }
-    .btn-red    { background: var(--ios-red); color: white; }
+    .btn-blue  { background: var(--ios-blue); color: white; }
+    .btn-green { background: var(--fruit-green); color: white; }
+    .btn-gray  { background: var(--ios-bg); color: var(--ios-blue); }
+    .btn-dark  { background: #1C1C1E; color: white; }
+    .btn-red   { background: var(--ios-red); color: white; }
 
-    /* Toggle */
     .toggle {
-      width: 51px; height: 31px;
-      background: var(--ios-green);
+      width: 51px; height: 31px; background: var(--ios-green);
       border-radius: 16px; position: relative; flex-shrink: 0;
     }
     .toggle::after {
-      content: '';
-      position: absolute; right: 2px; top: 2px;
-      width: 27px; height: 27px;
-      background: white; border-radius: 50%;
+      content: ''; position: absolute; right: 2px; top: 2px;
+      width: 27px; height: 27px; background: white; border-radius: 50%;
       box-shadow: 0 1px 4px rgba(0,0,0,.3);
     }
 
-    /* Step dots */
     .steps { display: flex; gap: 6px; justify-content: center; margin: 20px 0; }
     .step  { width: 8px; height: 8px; border-radius: 50%; background: var(--ios-sep); }
     .step.on { background: var(--ios-blue); width: 20px; border-radius: 4px; }
 
-    /* Role badges */
     .badge { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 8px; text-transform: uppercase; letter-spacing: .3px; flex-shrink: 0; }
     .badge-parent { background: #E8F4FD; color: var(--ios-blue); }
     .badge-kid    { background: #E8F8EC; color: #1E8449; }
     .badge-friend { background: #FFF3E0; color: var(--ios-orange); }
 
-    /* ── SCREEN 1: Welcome ── */
-    #s1 {
-      background: linear-gradient(165deg, #27AE60 0%, #1E8449 60%, #145A32 100%);
-      align-items: center; justify-content: center;
-      text-align: center; color: white;
+    /* ── CSS fake map (for non-Leaflet map screens) ── */
+    .css-map {
+      flex: 1; position: relative; overflow: hidden;
+      background: #d9e3d3;
     }
-    #s1 .logo {
-      width: 100px; height: 100px;
-      background: rgba(255,255,255,.18);
-      border-radius: 26px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 54px; margin-bottom: 24px;
-      box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    .css-map-roads {
+      position: absolute; inset: 0; pointer-events: none;
     }
-    #s1 h1 { font-size: 34px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
-    #s1 .tag { font-size: 16px; opacity: .8; line-height: 1.5; margin-bottom: 52px; padding: 0 24px; }
-    #s1 .btn-plant {
-      width: calc(100% - 48px); padding: 18px;
-      background: white; color: #1E8449;
-      border: none; border-radius: 16px;
-      font-size: 17px; font-weight: 700;
-      cursor: pointer; margin-bottom: 12px;
-      font-family: inherit;
+    .road-h {
+      position: absolute; left: 0; right: 0;
+      background: rgba(255,255,255,.65);
     }
-    #s1 .btn-join {
-      width: calc(100% - 48px); padding: 18px;
-      background: rgba(255,255,255,.18);
-      color: white;
-      border: 2px solid rgba(255,255,255,.35);
-      border-radius: 16px; font-size: 17px; font-weight: 600;
-      cursor: pointer; font-family: inherit;
+    .road-v {
+      position: absolute; top: 0; bottom: 0;
+      background: rgba(255,255,255,.65);
     }
-    #s1 .footer { position: absolute; bottom: 32px; font-size: 12px; opacity: .4; }
+    .block {
+      position: absolute;
+      background: rgba(180,170,155,.25);
+      border-radius: 3px;
+    }
 
-    /* ── SCREEN 2: Name Tree ── */
-    #s2 { background: var(--ios-bg); }
-
-    /* ── SCREEN 3: Join Tree ── */
-    #s3 { background: var(--ios-bg); }
-    .ph-box {
-      background: white; margin: 0 16px;
-      border-radius: 13px;
-      border: 2px solid var(--ios-blue);
-      padding: 18px 20px; text-align: center;
-    }
-    .ph-code {
-      font-family: "SF Mono", "Courier New", monospace;
-      font-size: 21px; font-weight: 700;
-      color: var(--ios-blue); letter-spacing: .5px;
-      margin-bottom: 6px; display: block;
-    }
-    .ph-hint { font-size: 12px; color: var(--ios-secondary); }
-
-    .fruit-grid {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      padding: 12px 16px;
-    }
-    .fg-item {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--ios-bg);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px; cursor: pointer;
-      border: 3px solid transparent;
-      transition: all .15s;
-    }
-    .fg-item.selected { border-color: var(--ios-blue); background: #E8F4FD; }
-
-    /* ── SCREEN 4: Map ── */
-    #s4 { background: #d9e3d3; }
-    #s4 .map-wrap { flex: 1; position: relative; }
-    #map { width: 100%; height: 100%; }
-
+    /* ── Map screen shared ── */
     .map-top {
       position: absolute; top: 54px; left: 0; right: 0;
       display: flex; align-items: center; justify-content: space-between;
       padding: 8px 12px; z-index: 400; pointer-events: none;
     }
     .tree-pill {
-      background: white; border-radius: 20px;
-      padding: 8px 14px; font-size: 15px; font-weight: 600;
+      background: white; border-radius: 20px; padding: 8px 14px;
+      font-size: 15px; font-weight: 600;
       box-shadow: 0 2px 10px rgba(0,0,0,.15);
       display: flex; align-items: center; gap: 6px;
     }
     .map-icon-btn {
-      background: white; width: 40px; height: 40px;
-      border-radius: 50%; display: flex; align-items: center;
-      justify-content: center; font-size: 18px;
+      background: white; width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
       box-shadow: 0 2px 10px rgba(0,0,0,.15);
     }
     .sos-fab {
@@ -328,8 +221,7 @@
       width: 56px; height: 56px; border-radius: 50%;
       background: var(--ios-red);
       display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 900; color: white;
-      letter-spacing: .5px;
+      font-size: 11px; font-weight: 900; color: white; letter-spacing: .5px;
       box-shadow: 0 4px 14px rgba(255,59,48,.55);
       z-index: 400; cursor: pointer;
     }
@@ -350,100 +242,37 @@
 
     /* ── SCREEN 5: Detail sheet ── */
     #s5 { cursor: pointer; }
-    #s5 .map-dim {
-      position: absolute; inset: 0;
-      background: #c4d4bb; filter: brightness(.55);
-      z-index: 1;
-    }
-    #s5 .scrim {
-      position: absolute; inset: 0;
-      background: rgba(0,0,0,.25); z-index: 2;
-    }
+    #s5 .map-dim { position: absolute; inset: 0; background: #c4d4bb; filter: brightness(.55); z-index: 1; }
+    #s5 .scrim  { position: absolute; inset: 0; background: rgba(0,0,0,.25); z-index: 2; }
     .sheet {
       position: absolute; bottom: 0; left: 0; right: 0;
       background: white; border-radius: 20px 20px 0 0;
       padding: 10px 20px 82px; z-index: 10;
     }
-    .sheet-handle {
-      width: 36px; height: 4px; background: var(--ios-sep);
-      border-radius: 2px; margin: 0 auto 18px;
-    }
+    .sheet-handle { width: 36px; height: 4px; background: var(--ios-sep); border-radius: 2px; margin: 0 auto 18px; }
     .sheet-header { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
-    .sheet-avatar {
-      width: 64px; height: 64px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 36px; flex-shrink: 0;
-    }
+    .sheet-avatar { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; flex-shrink: 0; }
     .sheet-name { font-size: 24px; font-weight: 700; }
     .sheet-role { font-size: 14px; color: var(--ios-secondary); margin-top: 2px; }
 
-    /* ── SCREEN 6: Members ── */
-    #s6 { background: var(--ios-bg); }
-    .member-ava {
-      width: 44px; height: 44px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px; flex-shrink: 0;
-    }
-
     /* ── SCREEN 7: Invite ── */
-    #s7 { background: var(--ios-bg); }
-    .seg {
-      background: rgba(118,118,128,.12);
-      border-radius: 9px; padding: 2px;
-      display: flex; margin-bottom: 16px;
-    }
-    .seg-opt {
-      flex: 1; padding: 7px 4px;
-      text-align: center; font-size: 13px;
-      font-weight: 500; border-radius: 7px;
-      cursor: pointer; color: var(--ios-label);
-    }
-    .seg-opt.on {
-      background: white;
-      box-shadow: 0 1px 4px rgba(0,0,0,.12);
-      font-weight: 600;
-    }
-    .code-card {
-      background: white; border-radius: 16px;
-      padding: 22px; text-align: center;
-      margin-bottom: 12px;
-      border: 2px solid #2ECC71;
-    }
-    .code-lbl {
-      font-size: 11px; color: var(--ios-secondary);
-      text-transform: uppercase; letter-spacing: .6px; margin-bottom: 12px;
-    }
-    .code-txt {
-      font-family: "SF Mono", "Courier New", monospace;
-      font-size: 20px; font-weight: 700;
-      color: #1E8449; letter-spacing: .5px;
-      line-height: 1.5; margin-bottom: 16px;
-    }
+    .seg { background: rgba(118,118,128,.12); border-radius: 9px; padding: 2px; display: flex; margin-bottom: 16px; }
+    .seg-opt { flex: 1; padding: 7px 4px; text-align: center; font-size: 13px; font-weight: 500; border-radius: 7px; cursor: pointer; color: var(--ios-label); }
+    .seg-opt.on { background: white; box-shadow: 0 1px 4px rgba(0,0,0,.12); font-weight: 600; }
+    .code-card { background: white; border-radius: 16px; padding: 22px; text-align: center; margin-bottom: 12px; border: 2px solid #2ECC71; }
+    .code-lbl { font-size: 11px; color: var(--ios-secondary); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 12px; }
+    .code-txt { font-family: "SF Mono", "Courier New", monospace; font-size: 20px; font-weight: 700; color: #1E8449; letter-spacing: .5px; line-height: 1.5; margin-bottom: 16px; }
     .code-meta { font-size: 12px; color: var(--ios-secondary); line-height: 1.5; }
-    .copy-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--ios-bg); border: none;
-      border-radius: 8px; padding: 8px 16px;
-      font-size: 14px; font-weight: 600;
-      color: var(--ios-blue); cursor: pointer;
-      font-family: inherit; margin-bottom: 12px;
-    }
+    .copy-btn { display: inline-flex; align-items: center; gap: 6px; background: var(--ios-bg); border: none; border-radius: 8px; padding: 8px 16px; font-size: 14px; font-weight: 600; color: var(--ios-blue); cursor: pointer; font-family: inherit; margin-bottom: 12px; }
 
-    /* ── SCREEN 8: SOS ── */
+    /* ── SCREEN 8: SOS Parent ── */
     #s8 { background: #130000; }
-    .sos-header {
-      background: var(--ios-red);
-      padding: 62px 24px 22px;
-      text-align: center; flex-shrink: 0;
-    }
-    .sos-header .ico   { font-size: 36px; margin-bottom: 6px; }
-    .sos-header .ttl   { font-size: 22px; font-weight: 800; color: white; }
-    .sos-header .sub   { font-size: 14px; color: rgba(255,255,255,.85); margin-top: 4px; }
+    .sos-header { background: var(--ios-red); padding: 62px 24px 22px; text-align: center; flex-shrink: 0; }
+    .sos-header .ico { font-size: 36px; margin-bottom: 6px; }
+    .sos-header .ttl { font-size: 22px; font-weight: 800; color: white; }
+    .sos-header .sub { font-size: 14px; color: rgba(255,255,255,.85); margin-top: 4px; }
     .sos-scroll { flex: 1; overflow-y: auto; padding: 16px; }
-    .sos-card {
-      background: #2A0000; border-radius: 14px;
-      padding: 16px; margin-bottom: 12px;
-    }
+    .sos-card { background: #2A0000; border-radius: 14px; padding: 16px; margin-bottom: 12px; }
     .sos-card .lbl { font-size: 11px; color: rgba(255,100,100,.6); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 8px; }
     .sos-card .val { font-size: 15px; color: white; font-weight: 500; }
     .sos-card .coord { font-family: monospace; font-size: 13px; color: rgba(255,255,255,.45); margin-top: 4px; }
@@ -451,48 +280,235 @@
     .sos-ava { width: 48px; height: 48px; border-radius: 50%; background: #FFE5E5; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
     .sos-info .name { font-size: 16px; font-weight: 700; color: white; }
     .sos-info .time { font-size: 13px; color: rgba(255,255,255,.4); margin-top: 2px; }
-    .pulse-dot {
-      width: 12px; height: 12px; border-radius: 50%;
-      background: var(--ios-red);
-      box-shadow: 0 0 8px var(--ios-red);
-      animation: pdot 1.1s ease-in-out infinite;
-      margin-left: auto; flex-shrink: 0;
+    .pulse-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--ios-red); box-shadow: 0 0 8px var(--ios-red); animation: pdot 1.1s ease-in-out infinite; margin-left: auto; flex-shrink: 0; }
+    .map-stub { height: 80px; background: #200000; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.2); font-size: 12px; margin-top: 10px; }
+    .sos-dismiss { width: 100%; padding: 17px; background: var(--ios-red); color: white; border: none; border-radius: 13px; font-size: 17px; font-weight: 700; cursor: pointer; font-family: inherit; margin-bottom: 10px; }
+    .sos-footer { font-size: 12px; color: rgba(255,80,80,.55); text-align: center; line-height: 1.6; }
+
+    /* ── Nudge banner (s9 empty tree) ── */
+    .nudge-banner {
+      position: absolute; bottom: 88px; left: 12px; right: 12px;
+      background: white; border-radius: 14px;
+      padding: 12px 14px; z-index: 400;
+      box-shadow: 0 4px 16px rgba(0,0,0,.18);
+      display: flex; align-items: center; gap: 10px;
     }
-    .map-stub {
-      height: 80px; background: #200000; border-radius: 8px;
+    .nudge-text { flex: 1; font-size: 14px; font-weight: 500; color: var(--ios-label); line-height: 1.35; }
+    .nudge-btn { background: var(--fruit-green); color: white; border: none; border-radius: 9px; padding: 8px 14px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; flex-shrink: 0; }
+    .nudge-close { font-size: 16px; color: var(--ios-secondary); cursor: pointer; flex-shrink: 0; }
+
+    /* ── SCREEN 10: Named Places list ── */
+    #s10 { background: var(--ios-bg); }
+    .place-icon { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+
+    /* ── SCREEN 11: Named Places create ── */
+    #s11 { background: var(--ios-bg); }
+    .map-search-bar {
+      position: absolute; top: 10px; left: 12px; right: 12px; z-index: 400;
+      background: white; border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.15);
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px;
+    }
+    .map-search-bar input {
+      flex: 1; border: none; font-size: 15px; font-family: inherit; outline: none;
+    }
+    .map-search-bar .search-ico { font-size: 16px; color: var(--ios-secondary); }
+    .create-sheet {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: white; border-radius: 20px 20px 0 0;
+      padding: 10px 16px 36px; z-index: 400;
+      box-shadow: 0 -4px 20px rgba(0,0,0,.12);
+    }
+    .radius-row { display: flex; align-items: center; gap: 10px; padding: 10px 0; }
+    .radius-track { flex: 1; height: 4px; background: var(--ios-sep); border-radius: 2px; position: relative; }
+    .radius-fill { position: absolute; left: 0; top: 0; width: 55%; height: 100%; background: var(--ios-blue); border-radius: 2px; }
+    .radius-thumb { position: absolute; left: calc(55% - 10px); top: -8px; width: 20px; height: 20px; background: white; border-radius: 50%; box-shadow: 0 1px 4px rgba(0,0,0,.3); border: 2px solid var(--ios-blue); }
+    .icon-grid { display: flex; gap: 8px; flex-wrap: wrap; padding: 8px 0 4px; }
+    .icon-opt { width: 40px; height: 40px; border-radius: 10px; background: var(--ios-bg); display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; border: 2px solid transparent; }
+    .icon-opt.sel { border-color: var(--ios-blue); background: #E8F4FD; }
+
+    /* ── SCREEN 12: SOS Kid Trigger ── */
+    #s12 { background: #1A0000; }
+    .sos-kid-top {
+      background: var(--ios-red); padding: 62px 24px 28px;
+      text-align: center; flex-shrink: 0;
+    }
+    .sos-sent-ico { font-size: 48px; margin-bottom: 10px; }
+    .sos-sent-ttl { font-size: 26px; font-weight: 800; color: white; margin-bottom: 4px; }
+    .sos-sent-sub { font-size: 15px; color: rgba(255,255,255,.85); }
+    .countdown-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 28px 24px;
+    }
+    .countdown-ring {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: conic-gradient(rgba(255,59,48,.9) 0deg, rgba(255,59,48,.9) 264deg, #2A0000 264deg);
       display: flex; align-items: center; justify-content: center;
-      color: rgba(255,255,255,.2); font-size: 12px; margin-top: 10px;
+      margin-bottom: 20px; position: relative;
     }
-    .sos-dismiss {
-      width: 100%; padding: 17px;
-      background: var(--ios-red); color: white;
-      border: none; border-radius: 13px;
+    .countdown-ring::before {
+      content: ''; position: absolute; inset: 8px;
+      background: #1A0000; border-radius: 50%;
+    }
+    .countdown-num {
+      position: relative; z-index: 1;
+      font-size: 36px; font-weight: 800; color: white; font-variant-numeric: tabular-nums;
+    }
+    .countdown-lbl { font-size: 14px; color: rgba(255,255,255,.5); margin-bottom: 24px; text-align: center; line-height: 1.4; }
+    .false-alarm-btn {
+      width: calc(100% - 48px); padding: 17px;
+      background: white; color: var(--ios-red);
+      border: none; border-radius: 14px;
+      font-size: 17px; font-weight: 700;
+      cursor: pointer; font-family: inherit; margin-bottom: 12px;
+    }
+    .sos-notified { font-size: 13px; color: rgba(255,255,255,.35); text-align: center; }
+
+    /* ── SCREEN 13: Post-Join Welcome ── */
+    #s13 {
+      background: linear-gradient(165deg, #27AE60 0%, #1E8449 60%, #145A32 100%);
+      align-items: center; justify-content: center; text-align: center; color: white;
+    }
+    .welcome-fruit { font-size: 80px; margin-bottom: 16px; line-height: 1; }
+    .welcome-ttl   { font-size: 26px; font-weight: 800; letter-spacing: -.5px; margin-bottom: 8px; }
+    .welcome-name  { font-size: 32px; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
+    .welcome-sub   { font-size: 16px; opacity: .8; line-height: 1.5; margin-bottom: 48px; padding: 0 24px; }
+    .welcome-cta {
+      width: calc(100% - 48px); padding: 18px;
+      background: white; color: #1E8449;
+      border: none; border-radius: 16px;
       font-size: 17px; font-weight: 700;
       cursor: pointer; font-family: inherit;
-      margin-bottom: 10px;
     }
-    .sos-footer { font-size: 12px; color: rgba(255,80,80,.55); text-align: center; line-height: 1.6; }
+
+    /* ── SCREEN 14: Tooltip Tour ── */
+    #s14 { }
+    #s14 .tour-map-bg { position: absolute; inset: 0; background: #d9e3d3; z-index: 1; }
+    #s14 .tour-map-bg::after {
+      content: ''; position: absolute; inset: 0;
+      background: rgba(0,0,0,.5);
+    }
+    .tour-card {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: white; border-radius: 20px 20px 0 0;
+      padding: 16px 20px 50px; z-index: 10;
+    }
+    .tour-handle { width: 36px; height: 4px; background: var(--ios-sep); border-radius: 2px; margin: 0 auto 20px; }
+    .tour-dots { display: flex; gap: 5px; justify-content: center; margin-bottom: 20px; }
+    .tour-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ios-sep); }
+    .tour-dot.on { background: var(--ios-blue); width: 20px; border-radius: 4px; }
+    .tour-ico  { font-size: 44px; text-align: center; margin-bottom: 12px; }
+    .tour-ttl  { font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 8px; }
+    .tour-body { font-size: 15px; color: var(--ios-secondary); text-align: center; line-height: 1.5; margin-bottom: 24px; }
+    .tour-btns { display: flex; gap: 10px; }
+    .tour-skip { flex: 1; padding: 14px; background: var(--ios-bg); border: none; border-radius: 12px; font-size: 15px; color: var(--ios-secondary); cursor: pointer; font-family: inherit; font-weight: 500; }
+    .tour-next { flex: 2; padding: 14px; background: var(--ios-blue); border: none; border-radius: 12px; font-size: 15px; font-weight: 700; color: white; cursor: pointer; font-family: inherit; }
+
+    /* ── SCREEN 15: Friend Warning ── */
+    #s15 {}
+    #s15 .warn-map-bg {
+      position: absolute; inset: 0; background: #d9e3d3; z-index: 1;
+      filter: brightness(.6);
+    }
+    .warn-sheet {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: white; border-radius: 20px 20px 0 0;
+      padding: 10px 20px 50px; z-index: 10;
+    }
+    .warn-body { text-align: center; padding: 8px 0 24px; }
+    .warn-ico  { font-size: 44px; margin-bottom: 14px; }
+    .warn-msg  { font-size: 22px; font-weight: 800; color: var(--ios-label); letter-spacing: -.4px; line-height: 1.3; margin-bottom: 8px; }
+    .warn-sub  { font-size: 14px; color: var(--ios-secondary); line-height: 1.4; }
+    .warn-extend {
+      width: 100%; padding: 17px; background: var(--ios-blue); color: white;
+      border: none; border-radius: 13px; font-size: 17px; font-weight: 700;
+      cursor: pointer; font-family: inherit; margin-bottom: 12px;
+    }
+    .warn-dismiss { display: block; text-align: center; font-size: 15px; color: var(--ios-secondary); cursor: pointer; background: none; border: none; font-family: inherit; width: 100%; padding: 8px; }
+
+    /* ── SCREEN 17: Friend Farewell ── */
+    #s17 {
+      background: linear-gradient(160deg, #F7971E 0%, #FFD200 100%);
+      align-items: center; justify-content: center; text-align: center;
+    }
+    .farewell-fruit { font-size: 80px; margin-bottom: 20px; line-height: 1; }
+    .farewell-ttl { font-size: 24px; font-weight: 800; color: #7A4000; letter-spacing: -.5px; margin-bottom: 10px; padding: 0 24px; }
+    .farewell-sub { font-size: 16px; color: rgba(100,50,0,.7); line-height: 1.5; margin-bottom: 8px; padding: 0 24px; }
+    .farewell-wave { font-size: 32px; margin-bottom: 48px; }
+    .farewell-btn {
+      width: calc(100% - 48px); padding: 18px;
+      background: rgba(0,0,0,.15); color: #7A4000;
+      border: none; border-radius: 16px;
+      font-size: 17px; font-weight: 700;
+      cursor: pointer; font-family: inherit;
+    }
+
+    /* ── SCREEN 16: Extend Visit ── */
+    #s16 {}
+    #s16 .ext-map-bg {
+      position: absolute; inset: 0; background: #d9e3d3; z-index: 1;
+      filter: brightness(.55);
+    }
+    .ext-sheet {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: white; border-radius: 20px 20px 0 0;
+      padding: 10px 20px 50px; z-index: 10;
+    }
+    .ext-header { text-align: center; padding: 4px 0 18px; }
+    .ext-header .ttl { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .ext-header .sub { font-size: 13px; color: var(--ios-secondary); }
+    .ext-option {
+      background: var(--ios-bg); border-radius: 14px;
+      padding: 16px 18px; margin-bottom: 10px;
+      display: flex; align-items: center; gap: 12px;
+      cursor: pointer; border: 2px solid transparent;
+      transition: all .15s;
+    }
+    .ext-option:hover { border-color: var(--ios-blue); background: #EAF4FF; }
+    .ext-dur { font-size: 20px; font-weight: 800; color: var(--ios-label); min-width: 70px; }
+    .ext-info .p { font-size: 15px; font-weight: 600; color: var(--ios-label); }
+    .ext-info .s { font-size: 12px; color: var(--ios-secondary); margin-top: 2px; }
+    .ext-cancel { display: block; text-align: center; padding: 14px; font-size: 15px; color: var(--ios-secondary); cursor: pointer; background: none; border: none; font-family: inherit; width: 100%; }
+    .ext-note { font-size: 12px; color: var(--ios-secondary); text-align: center; line-height: 1.4; margin: 12px 0 8px; }
+
+    /* Screen dots */
+    .screen-dots { display: flex; gap: 5px; justify-content: center; margin-top: 18px; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.25); cursor: pointer; transition: all .2s; }
+    .dot.on { background: white; width: 18px; border-radius: 3px; }
+    .screen-lbl { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,.4); text-align: center; }
 
     @keyframes pdot {
       0%, 100% { opacity: 1; transform: scale(1); }
       50%       { opacity: .4; transform: scale(1.5); }
     }
 
-    /* ── Screen dots + label ── */
-    .screen-dots { display: flex; gap: 5px; justify-content: center; margin-top: 18px; }
-    .dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: rgba(255,255,255,.25); cursor: pointer;
-      transition: all .2s;
+    /* Screen 1 unique */
+    #s1 {
+      background: linear-gradient(165deg, #27AE60 0%, #1E8449 60%, #145A32 100%);
+      align-items: center; justify-content: center; text-align: center; color: white;
     }
-    .dot.on { background: white; width: 18px; border-radius: 3px; }
-    .screen-lbl { margin-top: 10px; font-size: 12px; color: rgba(255,255,255,.4); text-align: center; }
+    #s1 .logo { width: 100px; height: 100px; background: rgba(255,255,255,.18); border-radius: 26px; display: flex; align-items: center; justify-content: center; font-size: 54px; margin-bottom: 24px; box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+    #s1 h1 { font-size: 34px; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+    #s1 .tag { font-size: 16px; opacity: .8; line-height: 1.5; margin-bottom: 52px; padding: 0 24px; }
+    #s1 .btn-plant { width: calc(100% - 48px); padding: 18px; background: white; color: #1E8449; border: none; border-radius: 16px; font-size: 17px; font-weight: 700; cursor: pointer; margin-bottom: 12px; font-family: inherit; }
+    #s1 .btn-join  { width: calc(100% - 48px); padding: 18px; background: rgba(255,255,255,.18); color: white; border: 2px solid rgba(255,255,255,.35); border-radius: 16px; font-size: 17px; font-weight: 600; cursor: pointer; font-family: inherit; }
+    #s1 .footer { position: absolute; bottom: 32px; font-size: 12px; opacity: .4; }
+
+    /* Screen 3 unique */
+    #s3 { background: var(--ios-bg); }
+    .ph-box { background: white; margin: 0 16px; border-radius: 13px; border: 2px solid var(--ios-blue); padding: 18px 20px; text-align: center; }
+    .ph-code { font-family: "SF Mono", "Courier New", monospace; font-size: 21px; font-weight: 700; color: var(--ios-blue); letter-spacing: .5px; margin-bottom: 6px; display: block; }
+    .ph-hint { font-size: 12px; color: var(--ios-secondary); }
+    .fg-item { width: 44px; height: 44px; border-radius: 50%; background: var(--ios-bg); display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; border: 3px solid transparent; transition: all .15s; }
+    .fg-item.selected { border-color: var(--ios-blue); background: #E8F4FD; }
+    .member-ava { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
   </style>
 </head>
 <body>
 
 <div class="page-title">🍓 Crotch Fruit</div>
-<div class="page-sub">iOS mockups · 8 screens · click or use ← → keys to navigate</div>
+<div class="page-sub">iOS mockups · 17 screens · click or use ← → keys to navigate</div>
 
 <div class="screen-nav" id="snav">
   <button onclick="go(1)">1 · Welcome</button>
@@ -502,7 +518,16 @@
   <button onclick="go(5)">5 · Fruit Detail</button>
   <button onclick="go(6)">6 · Members</button>
   <button onclick="go(7)">7 · Invite Code</button>
-  <button onclick="go(8)">8 · SOS Alert</button>
+  <button onclick="go(8)">8 · SOS Parent</button>
+  <button onclick="go(9)">9 · Empty Tree</button>
+  <button onclick="go(10)">10 · Places List</button>
+  <button onclick="go(11)">11 · Places Create</button>
+  <button onclick="go(12)">12 · SOS Kid</button>
+  <button onclick="go(13)">13 · Welcome Splash</button>
+  <button onclick="go(14)">14 · Tooltip Tour</button>
+  <button onclick="go(15)">15 · Friend Warning</button>
+  <button onclick="go(16)">16 · Extend Visit</button>
+  <button onclick="go(17)">17 · Friend Farewell</button>
 </div>
 
 <div class="phone-wrap">
@@ -510,22 +535,14 @@
 
   <div class="phone-frame">
     <div class="di"></div>
-
     <div class="phone-screen">
 
-      <!-- Status bar -->
       <div class="sb light" id="sb">
         <span>9:41</span>
-        <div class="sb-right">
-          <span style="letter-spacing:1px;">●●●●</span>
-          <span>Wi-Fi</span>
-          <span>🔋</span>
-        </div>
+        <div class="sb-right"><span style="letter-spacing:1px;">●●●●</span><span>Wi-Fi</span><span>🔋</span></div>
       </div>
 
-      <!-- ══════════════════════════════════════
-           SCREEN 1 · Welcome
-      ══════════════════════════════════════ -->
+      <!-- ══ S1 · Welcome ══ -->
       <div class="screen active" id="s1">
         <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px 40px;">
           <div class="logo">🌳</div>
@@ -537,9 +554,7 @@
         <div class="footer">v1.0 · Family · Location</div>
       </div>
 
-      <!-- ══════════════════════════════════════
-           SCREEN 2 · Name Your Tree
-      ══════════════════════════════════════ -->
+      <!-- ══ S2 · Name Your Tree ══ -->
       <div class="screen" id="s2">
         <div class="ios-nav">
           <button class="back" onclick="go(1)">‹ Back</button>
@@ -551,17 +566,11 @@
             <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Name your Tree</div>
             <div style="font-size:14px;color:var(--ios-secondary);line-height:1.5;">Your family's name. Everyone in your Tree will see it.</div>
           </div>
-
-          <div class="steps">
-            <div class="step on"></div>
-            <div class="step"></div>
-          </div>
-
+          <div class="steps"><div class="step on"></div><div class="step"></div></div>
           <div class="card" style="margin-top:8px;">
             <div class="row"><span class="row-label">Tree Name</span><span class="row-val">The Torgrimssens</span></div>
           </div>
           <div class="hint">Kids will see this name when they open the app.</div>
-
           <div class="card">
             <div class="row"><span class="row-label">Your Name</span><span class="row-val">James</span></div>
             <div class="row" style="justify-content:space-between;">
@@ -570,16 +579,13 @@
             </div>
           </div>
           <div class="hint">Tap to change your fruit — must be unique in your Tree.</div>
-
           <div style="height:20px;"></div>
           <button class="btn btn-green" onclick="go(4)">Plant the Tree 🌱</button>
           <div style="height:40px;"></div>
         </div>
       </div>
 
-      <!-- ══════════════════════════════════════
-           SCREEN 3 · Join a Tree
-      ══════════════════════════════════════ -->
+      <!-- ══ S3 · Join a Tree ══ -->
       <div class="screen" id="s3">
         <div class="ios-nav">
           <button class="back" onclick="go(1)">‹ Back</button>
@@ -591,110 +597,65 @@
             <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Enter your invite code</div>
             <div style="font-size:14px;color:var(--ios-secondary);line-height:1.5;">Ask a parent to generate a code from their app. Each code works exactly once.</div>
           </div>
-
           <div class="ph-box">
             <span class="ph-code">horse-battery-staple-banana</span>
             <div class="ph-hint">4-word passphrase · tap to edit</div>
           </div>
-
           <div class="card" style="margin-top:16px;">
             <div class="row">
-              <div class="row-body">
-                <div class="p">Joining as</div>
-                <div class="s">Set by the parent who created this code</div>
-              </div>
+              <div class="row-body"><div class="p">Joining as</div><div class="s">Set by the parent who created this code</div></div>
               <span style="font-size:15px;font-weight:600;">🧒 Kid</span>
             </div>
           </div>
-
           <div class="card">
             <div class="row"><span class="row-label">Your Name</span><span class="row-val">Emma</span></div>
             <div style="padding:10px 16px 14px;">
               <div style="font-size:13px;color:var(--ios-secondary);margin-bottom:8px;">Pick your fruit</div>
-              <div class="fruit-grid" style="padding:0;">
-                <div class="fg-item selected">🍓</div>
-                <div class="fg-item">🍐</div>
-                <div class="fg-item">🫐</div>
-                <div class="fg-item">🍊</div>
-                <div class="fg-item">🍋</div>
-                <div class="fg-item">🍎</div>
-                <div class="fg-item">🍑</div>
-                <div class="fg-item">🥝</div>
-                <div class="fg-item">🍍</div>
-                <div class="fg-item">🍇</div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                <div class="fg-item selected">🍓</div><div class="fg-item">🍐</div><div class="fg-item">🫐</div>
+                <div class="fg-item">🍊</div><div class="fg-item">🍋</div><div class="fg-item">🍎</div>
+                <div class="fg-item">🍑</div><div class="fg-item">🥝</div><div class="fg-item">🍍</div><div class="fg-item">🍇</div>
               </div>
             </div>
           </div>
-
           <div style="height:20px;"></div>
-          <button class="btn btn-blue" onclick="go(4)">Join the Tree 🌳</button>
+          <button class="btn btn-blue" onclick="go(13)">Join the Tree 🌳</button>
           <div style="height:40px;"></div>
         </div>
       </div>
 
-      <!-- ══════════════════════════════════════
-           SCREEN 4 · Main Map
-      ══════════════════════════════════════ -->
+      <!-- ══ S4 · Main Map ══ -->
       <div class="screen" id="s4">
-        <div class="map-wrap">
-          <div id="map"></div>
-
+        <div style="flex:1;position:relative;">
+          <div id="map" style="width:100%;height:100%;"></div>
           <div class="map-top">
             <div class="tree-pill">🌳 The Torgrimssens</div>
-            <div class="map-icon-btn">⚙️</div>
+            <div class="map-icon-btn" onclick="go(10)" style="pointer-events:all;cursor:pointer;" title="Named Places">📍</div>
           </div>
-
-          <div class="sos-fab" onclick="go(8)">SOS</div>
+          <div class="sos-fab" onclick="go(12)">SOS</div>
         </div>
-
         <div class="tab-bar">
-          <div class="tab on">
-            <div class="tab-ico">🗺️</div>
-            <div class="tab-lbl">Map</div>
-          </div>
-          <div class="tab" onclick="go(6)">
-            <div class="tab-ico">👨‍👩‍👧‍👦</div>
-            <div class="tab-lbl">Members</div>
-          </div>
-          <div class="tab" onclick="go(7)">
-            <div class="tab-ico">➕</div>
-            <div class="tab-lbl">Invite</div>
-          </div>
+          <div class="tab on"><div class="tab-ico">🗺️</div><div class="tab-lbl">Map</div></div>
+          <div class="tab" onclick="go(6)"><div class="tab-ico">👨‍👩‍👧‍👦</div><div class="tab-lbl">Members</div></div>
+          <div class="tab" onclick="go(7)"><div class="tab-ico">➕</div><div class="tab-lbl">Invite</div></div>
         </div>
       </div>
 
-      <!-- ══════════════════════════════════════
-           SCREEN 5 · Fruit Detail Sheet
-      ══════════════════════════════════════ -->
+      <!-- ══ S5 · Fruit Detail Sheet ══ -->
       <div class="screen" id="s5" onclick="go(4)">
         <div class="map-dim"></div>
         <div class="scrim"></div>
-
         <div class="sheet" onclick="event.stopPropagation()">
           <div class="sheet-handle"></div>
           <div class="sheet-header">
             <div class="sheet-avatar" style="background:#FFE5E5;">🍓</div>
-            <div>
-              <div class="sheet-name">Emma</div>
-              <div class="sheet-role">Kid · Strawberry</div>
-            </div>
+            <div><div class="sheet-name">Emma</div><div class="sheet-role">Kid · Strawberry</div></div>
           </div>
-
           <div class="card" style="margin:0 0 10px;">
-            <div class="row">
-              <div class="row-icon">📍</div>
-              <div class="row-body"><div class="p">Eastside Elementary</div><div class="s">Inside named place · safe zone</div></div>
-            </div>
-            <div class="row">
-              <div class="row-icon">🕐</div>
-              <div class="row-body"><div class="p">Updated 2 min ago</div><div class="s">Next update ~3 min</div></div>
-            </div>
-            <div class="row">
-              <div class="row-icon">🏠</div>
-              <div class="row-body"><div class="p">1.2 mi from Home</div><div class="s">Typical school day location</div></div>
-            </div>
+            <div class="row"><div class="row-icon">📍</div><div class="row-body"><div class="p">Eastside Elementary</div><div class="s">Inside named place · safe zone</div></div></div>
+            <div class="row"><div class="row-icon">🕐</div><div class="row-body"><div class="p">Updated 2 min ago</div><div class="s">Next update ~3 min</div></div></div>
+            <div class="row"><div class="row-icon">🏠</div><div class="row-body"><div class="p">1.2 mi from Home</div><div class="s">Typical school day location</div></div></div>
           </div>
-
           <div class="card" style="margin:0 0 14px;">
             <div class="row">
               <div class="row-icon">🔔</div>
@@ -702,14 +663,11 @@
               <div class="toggle"></div>
             </div>
           </div>
-
           <div style="text-align:center;font-size:13px;color:var(--ios-secondary);">Tap outside to dismiss</div>
         </div>
       </div>
 
-      <!-- ══════════════════════════════════════
-           SCREEN 6 · Members
-      ══════════════════════════════════════ -->
+      <!-- ══ S6 · Members ══ -->
       <div class="screen" id="s6">
         <div class="ios-nav">
           <button class="back" onclick="go(4)">‹ Map</button>
@@ -717,141 +675,393 @@
           <button class="action" onclick="go(7)">+ Invite</button>
         </div>
         <div class="scroller" style="background:var(--ios-bg);">
-
           <div class="sec-hdr">Parents</div>
           <div class="card">
             <div class="row">
               <div class="member-ava" style="background:#E8F5E9;">🍎</div>
-              <div class="row-body">
-                <div class="p">James <span style="color:var(--ios-secondary);font-size:12px;">(you)</span></div>
-                <div class="s">Active now</div>
-              </div>
-              <span class="badge badge-parent">Parent</span>
-              <span class="row-chev">›</span>
+              <div class="row-body"><div class="p">James <span style="color:var(--ios-secondary);font-size:12px;">(you)</span></div><div class="s">Active now</div></div>
+              <span class="badge badge-parent">Parent</span><span class="row-chev">›</span>
             </div>
             <div class="row">
               <div class="member-ava" style="background:#FFF3E0;">🍑</div>
               <div class="row-body"><div class="p">Sarah</div><div class="s">Active now</div></div>
-              <span class="badge badge-parent">Parent</span>
-              <span class="row-chev">›</span>
+              <span class="badge badge-parent">Parent</span><span class="row-chev">›</span>
             </div>
           </div>
-
           <div class="sec-hdr">Kids</div>
           <div class="card">
             <div class="row" onclick="go(5)" style="cursor:pointer;">
               <div class="member-ava" style="background:#FFE5E5;">🍓</div>
               <div class="row-body"><div class="p">Emma</div><div class="s">📍 Eastside Elementary · 2 min ago</div></div>
-              <span class="badge badge-kid">Kid</span>
-              <span class="row-chev">›</span>
+              <span class="badge badge-kid">Kid</span><span class="row-chev">›</span>
             </div>
             <div class="row">
               <div class="member-ava" style="background:#EAE5FF;">🫐</div>
               <div class="row-body"><div class="p">Jake</div><div class="s">📍 Home · 8 min ago</div></div>
-              <span class="badge badge-kid">Kid</span>
-              <span class="row-chev">›</span>
+              <span class="badge badge-kid">Kid</span><span class="row-chev">›</span>
             </div>
           </div>
-
           <div class="sec-hdr">Friends · With Us Today</div>
           <div class="card">
-            <div class="row">
+            <div class="row" onclick="go(15)" style="cursor:pointer;">
               <div class="member-ava" style="background:#FFF9C4;">🍋</div>
               <div class="row-body"><div class="p">Tyler</div><div class="s">☀️ With us today · 3 min ago</div></div>
-              <span class="badge badge-friend">Friend</span>
-              <span class="row-chev">›</span>
+              <span class="badge badge-friend">Friend</span><span class="row-chev">›</span>
             </div>
           </div>
-
           <div class="sec-hdr">Pending Invites</div>
           <div class="card">
             <div class="row" style="opacity:.6;">
               <div class="member-ava" style="background:var(--ios-bg);font-size:20px;">🎟️</div>
-              <div class="row-body">
-                <div class="p">Kid invite</div>
-                <div class="s">Generated today · unredeemed</div>
-              </div>
+              <div class="row-body"><div class="p">Kid invite</div><div class="s">Generated today · unredeemed</div></div>
               <span style="font-size:13px;color:var(--ios-red);font-weight:500;">Revoke</span>
             </div>
           </div>
-
           <div style="height:16px;"></div>
           <button class="btn btn-blue" onclick="go(7)">➕&nbsp; Invite Someone</button>
           <div style="height:36px;"></div>
         </div>
       </div>
 
-      <!-- ══════════════════════════════════════
-           SCREEN 7 · Generate Invite Code
-      ══════════════════════════════════════ -->
+      <!-- ══ S7 · Invite Code ══ -->
       <div class="screen" id="s7">
         <div class="ios-nav">
           <button class="back" onclick="go(6)">‹ Members</button>
           <span class="ttl">Invite</span>
         </div>
         <div class="scroller" style="background:var(--ios-bg);padding:0 16px;">
-
           <div style="text-align:center;padding:28px 16px 20px;">
             <div style="font-size:52px;margin-bottom:10px;">🎟️</div>
             <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Invite someone</div>
             <div style="font-size:14px;color:var(--ios-secondary);line-height:1.5;">Choose their role, then share the code.<br>Each code works exactly once and burns on redemption.</div>
           </div>
-
           <div style="font-size:13px;font-weight:600;color:var(--ios-secondary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Role</div>
           <div class="seg">
             <div class="seg-opt">Parent</div>
             <div class="seg-opt on">Kid</div>
             <div class="seg-opt">Friend&nbsp;Today</div>
           </div>
-
-          <div style="background:#FFF3E0;border-radius:10px;padding:11px 14px;margin-bottom:16px;font-size:13px;color:#B45309;display:none;" id="friend-warn">
-            ☀️ They'll be with the family for the day — access closes 24 hours after joining.
-          </div>
-
           <div class="code-card">
             <div class="code-lbl">One-time invite code</div>
             <div class="code-txt">horse-battery<br>staple-banana</div>
             <button class="copy-btn">📋&nbsp; Copy</button>
             <div class="code-meta">Single-use · burns on redemption<br>Valid until redeemed or revoked by a parent</div>
           </div>
-
           <button class="btn btn-gray" style="margin-bottom:10px;">🔄&nbsp; Generate New Code</button>
           <button class="btn btn-dark" style="margin-bottom:28px;">📤&nbsp; Share…</button>
         </div>
       </div>
 
-      <!-- ══════════════════════════════════════
-           SCREEN 8 · SOS Alert (Parent view)
-      ══════════════════════════════════════ -->
+      <!-- ══ S8 · SOS Alert — Parent view ══ -->
       <div class="screen" id="s8">
         <div class="sos-header">
           <div class="ico">🚨</div>
           <div class="ttl">SOS Alert</div>
           <div class="sub">Emma has triggered an emergency alert</div>
         </div>
-
         <div class="sos-scroll">
           <div class="sos-card">
             <div class="sos-who">
               <div class="sos-ava">🍓</div>
-              <div class="sos-info">
-                <div class="name">Emma</div>
-                <div class="time">Triggered 0:23 ago · 3:47 PM</div>
-              </div>
+              <div class="sos-info"><div class="name">Emma</div><div class="time">Triggered 0:23 ago · 3:47 PM</div></div>
               <div class="pulse-dot"></div>
             </div>
           </div>
-
           <div class="sos-card">
             <div class="lbl">Last Known Location</div>
             <div class="val">📍 Maplewood Park — near the picnic area</div>
             <div class="coord">37.4495° N, 122.1485° W</div>
             <div class="map-stub">Map snapshot loading…</div>
           </div>
-
           <button class="sos-dismiss" onclick="go(4)">✓&nbsp; Acknowledge &amp; Dismiss</button>
           <div class="sos-footer">All parents have been notified.<br>Alert stays active until a parent dismisses it.</div>
           <div style="height:32px;"></div>
+        </div>
+      </div>
+
+      <!-- ══ S9 · Empty Tree State ══ -->
+      <div class="screen" id="s9">
+        <div style="flex:1;position:relative;">
+          <!-- CSS fake map -->
+          <div class="css-map" style="position:absolute;inset:0;">
+            <div class="css-map-roads">
+              <div class="road-h" style="top:28%;height:14px;"></div>
+              <div class="road-h" style="top:55%;height:10px;"></div>
+              <div class="road-h" style="top:75%;height:8px;"></div>
+              <div class="road-v" style="left:22%;width:12px;"></div>
+              <div class="road-v" style="left:55%;width:9px;"></div>
+              <div class="road-v" style="left:75%;width:7px;"></div>
+              <div class="block" style="top:10%;left:5%;width:70px;height:50px;"></div>
+              <div class="block" style="top:10%;left:30%;width:90px;height:60px;"></div>
+              <div class="block" style="top:35%;left:5%;width:55px;height:45px;"></div>
+              <div class="block" style="top:35%;left:28%;width:80px;height:55px;"></div>
+              <div class="block" style="top:35%;left:60%;width:65px;height:45px;"></div>
+              <div class="block" style="top:62%;left:5%;width:60px;height:40px;"></div>
+              <div class="block" style="top:62%;left:28%;width:85px;height:50px;"></div>
+              <div class="block" style="top:62%;left:60%;width:70px;height:40px;"></div>
+              <div class="block" style="top:10%;left:60%;width:50px;height:55px;background:rgba(180,220,160,.4);border-radius:8px;"></div>
+            </div>
+          </div>
+          <!-- Parent's own pin, centred -->
+          <div style="position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);z-index:300;">
+            <div style="width:50px;height:50px;border-radius:50%;background:#E8F5E9;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 3px 12px rgba(0,0,0,.28);">🍎</div>
+          </div>
+          <div class="map-top">
+            <div class="tree-pill">🌳 The Torgrimssens</div>
+            <div class="map-icon-btn">⚙️</div>
+          </div>
+          <div class="sos-fab" onclick="go(12)">SOS</div>
+          <!-- Nudge banner -->
+          <div class="nudge-banner">
+            <div style="font-size:28px;">🌱</div>
+            <div class="nudge-text">Your Tree is empty — invite your first fruit!</div>
+            <button class="nudge-btn" onclick="go(7)">Invite →</button>
+            <span class="nudge-close">✕</span>
+          </div>
+        </div>
+        <div class="tab-bar">
+          <div class="tab on"><div class="tab-ico">🗺️</div><div class="tab-lbl">Map</div></div>
+          <div class="tab" onclick="go(6)"><div class="tab-ico">👨‍👩‍👧‍👦</div><div class="tab-lbl">Members</div></div>
+          <div class="tab" onclick="go(7)"><div class="tab-ico">➕</div><div class="tab-lbl">Invite</div></div>
+        </div>
+      </div>
+
+      <!-- ══ S10 · Named Places List ══ -->
+      <div class="screen" id="s10">
+        <div class="ios-nav">
+          <button class="back" onclick="go(4)">‹ Map</button>
+          <span class="ttl">Named Places</span>
+          <button class="action" onclick="go(11)">+ Add</button>
+        </div>
+        <div class="scroller" style="background:var(--ios-bg);">
+          <div class="sec-hdr">Saved Places</div>
+          <div class="card">
+            <div class="row">
+              <div class="place-icon" style="background:#FFF9C4;">🏠</div>
+              <div class="row-body"><div class="p">Home</div><div class="s">Safe zone · 100 m radius</div></div>
+              <span class="row-chev">›</span>
+            </div>
+            <div class="row">
+              <div class="place-icon" style="background:#E8F4FD;">🏫</div>
+              <div class="row-body"><div class="p">Eastside Elementary</div><div class="s">Arrive/leave alerts · 150 m radius</div></div>
+              <span class="row-chev">›</span>
+            </div>
+            <div class="row">
+              <div class="place-icon" style="background:#FFE5E5;">❤️</div>
+              <div class="row-body"><div class="p">Grandma's</div><div class="s">120 m radius · no alerts</div></div>
+              <span class="row-chev">›</span>
+            </div>
+            <div class="row">
+              <div class="place-icon" style="background:#E8F8EC;">🌳</div>
+              <div class="row-body"><div class="p">Maplewood Park</div><div class="s">200 m radius · no alerts</div></div>
+              <span class="row-chev">›</span>
+            </div>
+          </div>
+          <div class="hint">Tap a place to edit it. Members inside a place are shown by name in their detail card.</div>
+          <div style="height:16px;"></div>
+          <button class="btn btn-blue" onclick="go(11)">➕&nbsp; Add a Place</button>
+          <div style="height:36px;"></div>
+        </div>
+      </div>
+
+      <!-- ══ S11 · Named Places Create ══ -->
+      <div class="screen" id="s11">
+        <div class="ios-nav">
+          <button class="back" onclick="go(10)">‹ Places</button>
+          <span class="ttl">New Place</span>
+          <button class="action">Save</button>
+        </div>
+        <!-- Map area with search + pin + radius ring -->
+        <div style="flex:1;position:relative;">
+          <div class="css-map" style="position:absolute;inset:0;">
+            <div class="css-map-roads">
+              <div class="road-h" style="top:32%;height:13px;"></div>
+              <div class="road-h" style="top:62%;height:9px;"></div>
+              <div class="road-v" style="left:28%;width:11px;"></div>
+              <div class="road-v" style="left:62%;width:8px;"></div>
+              <div class="block" style="top:8%;left:5%;width:80px;height:55px;"></div>
+              <div class="block" style="top:8%;left:35%;width:75px;height:60px;"></div>
+              <div class="block" style="top:42%;left:5%;width:65px;height:45px;"></div>
+              <div class="block" style="top:42%;left:35%;width:80px;height:50px;background:rgba(180,220,160,.5);border-radius:8px;"></div>
+              <div class="block" style="top:42%;left:67%;width:60px;height:45px;"></div>
+            </div>
+          </div>
+          <!-- Radius ring (SVG) -->
+          <svg style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:10;" viewBox="0 0 369 460">
+            <circle cx="185" cy="220" r="90" fill="rgba(0,122,255,0.08)" stroke="#007AFF" stroke-width="2" stroke-dasharray="8,4"/>
+            <!-- drag handle at top -->
+            <circle cx="185" cy="130" r="9" fill="#007AFF" stroke="white" stroke-width="2"/>
+            <text x="185" y="127" text-anchor="middle" fill="white" font-size="9" font-weight="700" dy="4">↕</text>
+          </svg>
+          <!-- Pin -->
+          <div style="position:absolute;top:calc(220px - 25px);left:calc(185px - 25px);z-index:20;">
+            <div style="width:50px;height:50px;border-radius:50%;background:#E8F4FD;border:3px solid #007AFF;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 3px 12px rgba(0,122,255,.3);">📍</div>
+          </div>
+          <!-- Search bar floating over map -->
+          <div class="map-search-bar" style="position:absolute;top:10px;left:12px;right:12px;z-index:400;">
+            <span class="search-ico">🔍</span>
+            <input type="text" placeholder="Search address or place name…" value="Eastside Elementary" readonly>
+            <span style="font-size:14px;color:var(--ios-secondary);">✕</span>
+          </div>
+        </div>
+        <!-- Bottom sheet -->
+        <div class="create-sheet">
+          <div class="sheet-handle" style="margin-bottom:14px;"></div>
+          <div class="card" style="margin:0 0 10px;">
+            <div class="row"><span class="row-label">Name</span><span class="row-val">Eastside Elementary</span></div>
+          </div>
+          <div style="font-size:13px;color:var(--ios-secondary);margin:0 0 6px;">Icon</div>
+          <div class="icon-grid">
+            <div class="icon-opt">🏠</div><div class="icon-opt sel">🏫</div><div class="icon-opt">❤️</div>
+            <div class="icon-opt">🌳</div><div class="icon-opt">⭐️</div><div class="icon-opt">🏥</div>
+          </div>
+          <div style="font-size:13px;color:var(--ios-secondary);margin:10px 0 6px;">Radius — 150 m</div>
+          <div class="radius-row">
+            <span style="font-size:12px;color:var(--ios-secondary);">50m</span>
+            <div class="radius-track"><div class="radius-fill"></div><div class="radius-thumb"></div></div>
+            <span style="font-size:12px;color:var(--ios-secondary);">500m</span>
+          </div>
+          <div class="card" style="margin:10px 0 0;">
+            <div class="row" style="justify-content:space-between;">
+              <span style="font-size:15px;">Safe zone (out-of-bounds alert)</span>
+              <div class="toggle" style="background:var(--ios-sep);"><div style="position:absolute;left:2px;top:2px;width:27px;height:27px;background:white;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.3);"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S12 · SOS — Kid Trigger & Countdown ══ -->
+      <div class="screen" id="s12">
+        <div class="sos-kid-top">
+          <div class="sos-sent-ico">🚨</div>
+          <div class="sos-sent-ttl">SOS Sent</div>
+          <div class="sos-sent-sub">2 parents have been notified</div>
+        </div>
+        <div style="flex:1;background:#1A0000;display:flex;flex-direction:column;">
+          <div class="countdown-wrap">
+            <div class="countdown-ring">
+              <div class="countdown-num">22</div>
+            </div>
+            <div class="countdown-lbl">Seconds to send a false-alarm notice<br>to your parents</div>
+            <button class="false-alarm-btn" onclick="go(4)">✓&nbsp; Everything is OK — False Alarm</button>
+            <div class="sos-notified">Alert sent to James &amp; Sarah · 3:47 PM</div>
+          </div>
+          <div style="margin:0 24px;background:#2A0000;border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px;">
+            <div style="font-size:28px;">📍</div>
+            <div>
+              <div style="font-size:14px;color:white;font-weight:600;">Your location was shared</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.4);margin-top:2px;">Maplewood Park · 37.4495° N</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S13 · Post-Join Welcome ══ -->
+      <div class="screen" id="s13">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px 48px;">
+          <div class="welcome-fruit">🍓</div>
+          <div class="welcome-ttl">Welcome to</div>
+          <div class="welcome-name">The Torgrimssens!</div>
+          <div class="welcome-sub">Your family can now see where you are. You can see them too.</div>
+          <button class="welcome-cta" onclick="go(14)">Let's go! →</button>
+        </div>
+      </div>
+
+      <!-- ══ S14 · First-run Tooltip Tour ══ -->
+      <div class="screen" id="s14">
+        <div class="tour-map-bg">
+          <div class="css-map-roads">
+            <div class="road-h" style="top:28%;height:14px;background:rgba(255,255,255,.65);position:absolute;left:0;right:0;"></div>
+            <div class="road-h" style="top:58%;height:10px;background:rgba(255,255,255,.65);position:absolute;left:0;right:0;"></div>
+            <div class="road-v" style="left:30%;width:11px;background:rgba(255,255,255,.65);position:absolute;top:0;bottom:0;"></div>
+            <div class="road-v" style="left:65%;width:8px;background:rgba(255,255,255,.65);position:absolute;top:0;bottom:0;"></div>
+          </div>
+          <!-- Fruit pins visible through overlay -->
+          <div style="position:absolute;top:38%;left:48%;z-index:3;width:44px;height:44px;border-radius:50%;background:#FF4757;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 3px 8px rgba(0,0,0,.3);">🍓</div>
+          <div style="position:absolute;top:50%;left:25%;z-index:3;width:44px;height:44px;border-radius:50%;background:#5352ED;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 3px 8px rgba(0,0,0,.3);">🫐</div>
+        </div>
+        <div class="tour-card">
+          <div class="tour-handle"></div>
+          <div class="tour-dots">
+            <div class="tour-dot on"></div>
+            <div class="tour-dot"></div>
+            <div class="tour-dot"></div>
+          </div>
+          <div class="tour-ico">📍</div>
+          <div class="tour-ttl">Tap any fruit</div>
+          <div class="tour-body">Tap a fruit pin on the map to see where that person is, when they last updated, and how far they are from home.</div>
+          <div class="tour-btns">
+            <button class="tour-skip" onclick="go(4)">Skip</button>
+            <button class="tour-next" onclick="go(4)">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S15 · Friend Warning ══ -->
+      <div class="screen" id="s15">
+        <div class="warn-map-bg">
+          <div style="position:absolute;top:28%;left:0;right:0;height:14px;background:rgba(255,255,255,.65);"></div>
+          <div style="position:absolute;top:58%;left:0;right:0;height:10px;background:rgba(255,255,255,.65);"></div>
+          <div style="position:absolute;left:30%;top:0;bottom:0;width:11px;background:rgba(255,255,255,.65);"></div>
+          <div style="position:absolute;left:65%;top:0;bottom:0;width:8px;background:rgba(255,255,255,.65);"></div>
+          <!-- Tyler's fruit pin visible through dimmed map -->
+          <div style="position:absolute;top:36%;left:50%;transform:translate(-50%,-50%);z-index:3;width:48px;height:48px;border-radius:50%;background:#F9CA24;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 3px 10px rgba(0,0,0,.3);">🍋</div>
+        </div>
+        <div class="warn-sheet">
+          <div class="sheet-handle" style="margin-bottom:16px;"></div>
+          <div class="warn-body">
+            <div class="warn-ico">☀️</div>
+            <div class="warn-msg">Only 2 more hours<br>with 🍋 Tyler</div>
+            <div class="warn-sub">Tyler's visit ends at 5:45 PM.<br>Generate a new code to keep him a bit longer.</div>
+          </div>
+          <button class="warn-extend" onclick="go(16)">Extend Visit</button>
+          <button class="warn-dismiss" onclick="go(4)">Not now</button>
+        </div>
+      </div>
+
+      <!-- ══ S17 · Friend Farewell ══ -->
+      <div class="screen" id="s17">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:64px 24px 48px;">
+          <div class="farewell-fruit">🍋</div>
+          <div class="farewell-ttl">Thanks for joining us today, Tyler!</div>
+          <div class="farewell-sub">Hope you had a great time with The Torgrimssens 🌳</div>
+          <div class="farewell-wave">👋</div>
+          <button class="farewell-btn">Dismiss</button>
+        </div>
+      </div>
+
+      <!-- ══ S16 · Extend Visit ══ -->
+      <div class="screen" id="s16">
+        <div class="ext-map-bg">
+          <div style="position:absolute;top:28%;left:0;right:0;height:14px;background:rgba(255,255,255,.65);"></div>
+          <div style="position:absolute;top:58%;left:0;right:0;height:10px;background:rgba(255,255,255,.65);"></div>
+          <div style="position:absolute;left:30%;top:0;bottom:0;width:11px;background:rgba(255,255,255,.65);"></div>
+          <!-- Tyler's fruit pin -->
+          <div style="position:absolute;top:40%;left:52%;width:44px;height:44px;border-radius:50%;background:#F9CA24;border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 3px 8px rgba(0,0,0,.3);">🍋</div>
+        </div>
+        <div class="ext-sheet">
+          <div class="sheet-handle" style="margin-bottom:14px;"></div>
+          <div class="ext-header">
+            <div class="ttl">Extend Tyler's visit ☀️</div>
+            <div class="sub">Currently ends at 5:45 PM · choose a new end time</div>
+          </div>
+          <div class="ext-option">
+            <div class="ext-dur">+2 h</div>
+            <div class="ext-info"><div class="p">Until 7:45 PM</div><div class="s">A couple more hours together</div></div>
+            <span style="font-size:18px;color:var(--ios-sep);">›</span>
+          </div>
+          <div class="ext-option" style="border-color:var(--ios-blue);background:#EAF4FF;">
+            <div class="ext-dur" style="color:var(--ios-blue);">+8 h</div>
+            <div class="ext-info"><div class="p" style="color:var(--ios-blue);">Until 1:45 AM</div><div class="s">Full evening</div></div>
+            <span style="font-size:18px;color:var(--ios-blue);">›</span>
+          </div>
+          <div class="ext-option">
+            <div class="ext-dur">+24 h</div>
+            <div class="ext-info"><div class="p">Until tomorrow 5:45 PM</div><div class="s">Sleepover!</div></div>
+            <span style="font-size:18px;color:var(--ios-sep);">›</span>
+          </div>
+          <div class="ext-note">Tyler will receive a notification to confirm the extension.</div>
+          <button class="ext-cancel" onclick="go(6)">Cancel</button>
         </div>
       </div>
 
@@ -867,14 +1077,23 @@
 
 <script>
 const SCREENS = [
-  { n:1, lbl:"Welcome" },
-  { n:2, lbl:"Name Your Tree" },
-  { n:3, lbl:"Join a Tree (enter passphrase + pick fruit)" },
-  { n:4, lbl:"Main Map" },
-  { n:5, lbl:"Fruit Detail Sheet (tap outside to close)" },
-  { n:6, lbl:"Members List — tap Emma to see detail" },
-  { n:7, lbl:"Generate Invite Code" },
-  { n:8, lbl:"SOS Alert — Parent View" },
+  { n:1,  lbl:"Welcome" },
+  { n:2,  lbl:"Name Your Tree" },
+  { n:3,  lbl:"Join a Tree (enter passphrase + pick fruit)" },
+  { n:4,  lbl:"Main Map — tap 📍 for Places, SOS to trigger kid view" },
+  { n:5,  lbl:"Fruit Detail Sheet (tap outside to close)" },
+  { n:6,  lbl:"Members — tap Tyler to see Extend Visit" },
+  { n:7,  lbl:"Generate Invite Code" },
+  { n:8,  lbl:"SOS Alert — Parent View" },
+  { n:9,  lbl:"Empty Tree State — parent's own pin + nudge banner" },
+  { n:10, lbl:"Named Places List" },
+  { n:11, lbl:"Named Places — Create (search + radius ring)" },
+  { n:12, lbl:"SOS — Kid View (false-alarm countdown)" },
+  { n:13, lbl:"Post-Join Welcome Splash" },
+  { n:14, lbl:"First-Run Tooltip Tour (card 1 of 3)" },
+  { n:15, lbl:"Friend Warning — tap Tyler in Members to reach this" },
+  { n:16, lbl:"Extend Visit Sheet" },
+  { n:17, lbl:"Friend Farewell Screen" },
 ];
 
 let cur = 1;
@@ -899,22 +1118,14 @@ function go(n) {
 
   if (cur === 4) setTimeout(initMap, 60);
 
-  // Status bar & home indicator colour
-  const dark = cur === 1 || cur === 8;
-  document.getElementById('sb').className = 'sb ' + (dark ? 'dark' : 'light');
+  const dark = [1, 8, 12, 13, 17].includes(cur);
+  document.getElementById('sb').className  = 'sb ' + (dark ? 'dark' : 'light');
   document.getElementById('hi').className  = 'hi ' + (dark ? 'light' : '');
 
-  // Nav pills
-  document.querySelectorAll('#snav button').forEach((b,i) => {
-    b.classList.toggle('active', i+1 === cur);
-  });
-
+  document.querySelectorAll('#snav button').forEach((b,i) => b.classList.toggle('active', i+1===cur));
   document.getElementById('pbtn').disabled = cur === 1;
   document.getElementById('nbtn').disabled = cur === SCREENS.length;
-
-  document.getElementById('lbl').textContent =
-    `Screen ${cur} of ${SCREENS.length} — ${SCREENS[cur-1].lbl}`;
-
+  document.getElementById('lbl').textContent = `Screen ${cur} of ${SCREENS.length} — ${SCREENS[cur-1].lbl}`;
   buildDots();
 }
 
@@ -922,63 +1133,54 @@ function initMap() {
   if (mapReady) return;
   mapReady = true;
 
-  const map = L.map('map', {
-    center: [37.4519, -122.1510],
-    zoom: 14,
-    zoomControl: true,
-    attributionControl: false,
-  });
+  const map = L.map('map', { center:[37.4519,-122.1510], zoom:14, zoomControl:true, attributionControl:false });
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19 }).addTo(map);
 
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    { maxZoom: 19 }).addTo(map);
-
-  function pin(emoji, bg, border) {
+  function pin(emoji, bg) {
     return L.divIcon({
       className: '',
-      html: `<div style="width:50px;height:50px;border-radius:50%;
-        background:${bg};border:3px solid ${border};
-        display:flex;align-items:center;justify-content:center;
-        font-size:26px;box-shadow:0 3px 12px rgba(0,0,0,.3);
-        cursor:pointer;">${emoji}</div>`,
+      html: `<div style="width:50px;height:50px;border-radius:50%;background:${bg};border:3px solid white;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 3px 12px rgba(0,0,0,.3);cursor:pointer;">${emoji}</div>`,
       iconSize:[50,50], iconAnchor:[25,25], popupAnchor:[0,-30],
     });
   }
 
-  function homePinIcon() {
+  function stalePin(emoji) {
     return L.divIcon({
       className: '',
-      html: `<div style="width:42px;height:42px;border-radius:50%;
-        background:#FFFDE7;border:3px solid #FDD835;
-        display:flex;align-items:center;justify-content:center;
-        font-size:20px;box-shadow:0 2px 8px rgba(0,0,0,.2);">🏠</div>`,
+      html: `<div style="position:relative;width:50px;height:50px;">
+        <div style="width:50px;height:50px;border-radius:50%;background:#bbb;border:3px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:26px;filter:grayscale(100%);opacity:0.55;box-shadow:0 3px 12px rgba(0,0,0,.2);">${emoji}</div>
+        <div style="position:absolute;bottom:0;right:-2px;width:19px;height:19px;border-radius:50%;background:white;border:1px solid #ccc;display:flex;align-items:center;justify-content:center;font-size:11px;">🕐</div>
+      </div>`,
+      iconSize:[50,50], iconAnchor:[25,25], popupAnchor:[0,-30],
+    });
+  }
+
+  function homePin() {
+    return L.divIcon({
+      className: '',
+      html: `<div style="width:42px;height:42px;border-radius:50%;background:#FFFDE7;border:3px solid #FDD835;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 2px 8px rgba(0,0,0,.2);">🏠</div>`,
       iconSize:[42,42], iconAnchor:[21,21],
     });
   }
 
-  // Named place circles
-  L.circle([37.4560, -122.1420], { radius:120, color:'#FF4757', fillColor:'#FF4757', fillOpacity:.07, weight:2, dashArray:'6,4' }).addTo(map);
-  L.circle([37.4480, -122.1620], { radius:100, color:'#FDD835', fillColor:'#FDD835', fillOpacity:.1,  weight:2, dashArray:'6,4' }).addTo(map);
+  L.circle([37.4560,-122.1420],{radius:120,color:'#FF4757',fillColor:'#FF4757',fillOpacity:.07,weight:2,dashArray:'6,4'}).addTo(map);
+  L.circle([37.4480,-122.1620],{radius:100,color:'#FDD835',fillColor:'#FDD835',fillOpacity:.1,weight:2,dashArray:'6,4'}).addTo(map);
 
-  // Markers
-  L.marker([37.4480,-122.1620], { icon: homePinIcon() })
-    .addTo(map).bindPopup('🏠 Home');
+  L.marker([37.4480,-122.1620],{icon:homePin()}).addTo(map).bindPopup('🏠 Home');
 
-  L.marker([37.4560,-122.1420], { icon: pin('🍓','#FF4757','white') })
-    .addTo(map)
+  L.marker([37.4560,-122.1420],{icon:pin('🍓','#FF4757')}).addTo(map)
     .bindPopup('<b>Emma 🍓</b><br>📍 Eastside Elementary<br><small>Updated 2 min ago</small>')
     .openPopup();
 
-  L.marker([37.4480,-122.1620], { icon: pin('🫐','#5352ED','white') })
-    .addTo(map)
+  L.marker([37.4480,-122.1620],{icon:pin('🫐','#5352ED')}).addTo(map)
     .bindPopup('<b>Jake 🫐</b><br>📍 Home<br><small>Updated 8 min ago</small>');
 
-  L.marker([37.4510,-122.1530], { icon: pin('🍐','#7BED9F','white') })
-    .addTo(map)
+  L.marker([37.4510,-122.1530],{icon:pin('🍐','#7BED9F')}).addTo(map)
     .bindPopup('<b>Lily 🍐</b><br>📍 En route<br><small>Updated 5 min ago</small>');
 
-  L.marker([37.4495,-122.1485], { icon: pin('🍋','#F9CA24','white') })
-    .addTo(map)
-    .bindPopup('<b>Tyler 🍋</b><br>☀️ Friend · With us today<br><small>Updated 3 min ago</small>');
+  // Tyler — stale pin (greyscale + clock badge)
+  L.marker([37.4495,-122.1485],{icon:stalePin('🍋')}).addTo(map)
+    .bindPopup('<b>Tyler 🍋</b><br>☀️ Friend · With us today<br><small>⚠️ Last update 22 min ago</small>');
 
   setTimeout(() => map.invalidateSize(), 150);
 }
