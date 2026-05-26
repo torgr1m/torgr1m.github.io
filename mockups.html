@@ -581,12 +581,72 @@
     .fg-item { width: 44px; height: 44px; border-radius: 50%; background: var(--ios-bg); display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; border: 3px solid transparent; transition: all .15s; }
     .fg-item.selected { border-color: var(--ios-blue); background: #E8F4FD; }
     .member-ava { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
+
+    /* ── SCREEN 19: SOS Hold-to-confirm (pre-fire) ── */
+    #s19 { background: #1A0000; align-items: center; justify-content: center; }
+    .hold-wrap { display: flex; flex-direction: column; align-items: center; padding: 0 24px; text-align: center; }
+    .hold-hint-top { font-size: 13px; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 36px; font-weight: 600; }
+    .hold-ring {
+      width: 220px; height: 220px; border-radius: 50%;
+      background: conic-gradient(var(--ios-red) 0deg, var(--ios-red) 198deg, rgba(255,255,255,.08) 198deg);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 32px; position: relative;
+      box-shadow: 0 8px 32px rgba(255,59,48,.45);
+    }
+    .hold-ring::before {
+      content: ''; position: absolute; inset: 14px;
+      background: var(--ios-red); border-radius: 50%;
+    }
+    .hold-ring-inner { position: relative; z-index: 1; color: white; font-weight: 900; font-size: 38px; letter-spacing: 1px; }
+    .hold-ttl { font-size: 22px; font-weight: 800; color: white; margin-bottom: 8px; letter-spacing: -.3px; }
+    .hold-sub { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.5; padding: 0 8px; margin-bottom: 18px; }
+    .hold-cancel-hint { font-size: 13px; color: rgba(255,255,255,.35); }
+
+    /* ── SCREEN 20: Leave Tree confirmation ── */
+    #s20 { background: var(--ios-bg); }
+    .leave-content { padding: 28px 16px 24px; text-align: center; }
+    .leave-ico { font-size: 56px; margin-bottom: 16px; }
+    .leave-ttl { font-size: 22px; font-weight: 800; color: var(--ios-label); margin-bottom: 10px; letter-spacing: -.3px; }
+    .leave-sub { font-size: 15px; color: var(--ios-secondary); line-height: 1.5; margin-bottom: 20px; padding: 0 8px; }
+    .leave-card { background: white; border-radius: 14px; padding: 14px 16px; margin-bottom: 22px; text-align: left; }
+    .leave-list { list-style: none; padding: 0; margin: 0; }
+    .leave-list li { font-size: 14px; color: var(--ios-label); padding: 5px 0; display: flex; gap: 10px; line-height: 1.45; }
+    .leave-list li .b { color: var(--ios-red); flex-shrink: 0; font-weight: 700; }
+    .leave-cta {
+      width: 100%; padding: 17px; background: var(--ios-red); color: white;
+      border: none; border-radius: 13px; font-size: 17px; font-weight: 700;
+      cursor: pointer; font-family: inherit; margin-bottom: 10px;
+    }
+    .leave-cancel {
+      width: 100%; padding: 15px; background: transparent; color: var(--ios-blue);
+      border: none; border-radius: 13px; font-size: 17px; font-weight: 500;
+      cursor: pointer; font-family: inherit;
+    }
+
+    /* ── SCREEN 21: App Lock biometric gate ── */
+    #s21 {
+      background: linear-gradient(180deg, #1c1f23 0%, #0a0c0f 100%);
+      align-items: center; justify-content: center; text-align: center; color: white;
+    }
+    .lock-logo { width: 76px; height: 76px; background: rgba(255,255,255,.1); border-radius: 22px; display: flex; align-items: center; justify-content: center; font-size: 40px; margin-bottom: 22px; }
+    .lock-ttl { font-size: 22px; font-weight: 800; margin-bottom: 8px; letter-spacing: -.3px; }
+    .lock-sub { font-size: 15px; opacity: .55; line-height: 1.5; margin-bottom: 48px; padding: 0 32px; }
+    .lock-face {
+      width: 108px; height: 108px; border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      border: 2px solid rgba(255,255,255,.18);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 54px; margin-bottom: 18px;
+    }
+    .lock-prompt { font-size: 16px; font-weight: 600; opacity: .9; margin-bottom: 4px; }
+    .lock-prompt-sub { font-size: 13px; opacity: .45; margin-bottom: 48px; }
+    .lock-passcode { font-size: 15px; color: #79b8ff; opacity: .95; cursor: pointer; padding: 8px 16px; }
   </style>
 </head>
 <body>
 
 <div class="page-title">🍓 Crotch Fruit</div>
-<div class="page-sub">iOS mockups · 18 screens · click or use ← → keys to navigate</div>
+<div class="page-sub">iOS mockups · 21 screens · click or use ← → keys to navigate</div>
 
 <div class="screen-nav" id="snav">
   <button onclick="go(1)">1 · Welcome</button>
@@ -607,6 +667,9 @@
   <button onclick="go(16)">16 · Extend Visit</button>
   <button onclick="go(17)">17 · Friend Farewell</button>
   <button onclick="go(18)">18 · Location Permission</button>
+  <button onclick="go(19)">19 · SOS Hold-to-fire</button>
+  <button onclick="go(20)">20 · Leave Tree</button>
+  <button onclick="go(21)">21 · App Lock</button>
 </div>
 
 <div class="phone-wrap">
@@ -711,7 +774,7 @@
             <div class="tree-pill">🌳 The Torgrimssens</div>
             <div class="map-icon-btn" onclick="go(10)" style="pointer-events:all;cursor:pointer;" title="Named Places">📍</div>
           </div>
-          <div class="sos-fab" onclick="go(12)">SOS</div>
+          <div class="sos-fab" onclick="go(19)">SOS</div>
         </div>
         <div class="tab-bar">
           <div class="tab on"><div class="tab-ico">🗺️</div><div class="tab-lbl">Map</div></div>
@@ -890,7 +953,7 @@
             <div class="tree-pill">🌳 The Torgrimssens</div>
             <div class="map-icon-btn">⚙️</div>
           </div>
-          <div class="sos-fab" onclick="go(12)">SOS</div>
+          <div class="sos-fab" onclick="go(19)">SOS</div>
           <!-- Nudge banner -->
           <div class="nudge-banner">
             <div style="font-size:28px;">🌱</div>
@@ -1181,6 +1244,55 @@
         </div>
       </div>
 
+      <!-- ══ S19 · SOS Hold-to-confirm (pre-fire) ══ -->
+      <div class="screen" id="s19">
+        <div class="hold-wrap">
+          <div class="hold-hint-top">Hold to send SOS</div>
+          <div class="hold-ring" onclick="go(12)" style="cursor:pointer;">
+            <div class="hold-ring-inner">SOS</div>
+          </div>
+          <div class="hold-ttl">Keep holding…</div>
+          <div class="hold-sub">Your parents will see your alert and your location as soon as the ring fills (3 seconds).</div>
+          <div class="hold-cancel-hint">Release to cancel · no one will be notified</div>
+        </div>
+      </div>
+
+      <!-- ══ S20 · Settings → Leave Tree confirmation ══ -->
+      <div class="screen" id="s20">
+        <div class="ios-nav">
+          <button class="back" onclick="go(6)">‹ Settings</button>
+          <span class="ttl">Leave Tree</span>
+        </div>
+        <div class="scroller" style="background:var(--ios-bg);">
+          <div class="leave-content">
+            <div class="leave-ico">🌳</div>
+            <div class="leave-ttl">Leave The Torgrimssens?</div>
+            <div class="leave-sub">You can leave at any time. Here's what will happen:</div>
+            <div class="leave-card">
+              <ul class="leave-list">
+                <li><span class="b">•</span><span>Your fruit will disappear from everyone's map right away.</span></li>
+                <li><span class="b">•</span><span>Your phone will stop sharing its location with the Tree.</span></li>
+                <li><span class="b">•</span><span>Other parents will be told you've left, but no one can stop you.</span></li>
+                <li><span class="b">•</span><span>To come back later, a parent will need to send you a new invite.</span></li>
+              </ul>
+            </div>
+            <button class="leave-cta" onclick="go(1)">Leave Tree</button>
+            <button class="leave-cancel" onclick="go(6)">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ S21 · App Lock biometric gate ══ -->
+      <div class="screen" id="s21">
+        <div class="lock-logo">🍓</div>
+        <div class="lock-ttl">Crotch Fruit is locked</div>
+        <div class="lock-sub">Unlock with Face ID to see your Tree.</div>
+        <div class="lock-face">😊</div>
+        <div class="lock-prompt">Face ID</div>
+        <div class="lock-prompt-sub">Look at your screen</div>
+        <div class="lock-passcode" onclick="go(4)">Use Passcode</div>
+      </div>
+
       <div class="hi" id="hi"></div>
     </div>
   </div>
@@ -1213,13 +1325,16 @@ const SCREENS = [
   { n:9,  lbl:"Empty Tree State — parent's own pin + nudge banner" },
   { n:10, lbl:"Named Places List" },
   { n:11, lbl:"Named Places — Create (search + radius ring)" },
-  { n:12, lbl:"SOS — Kid View (false-alarm countdown)" },
+  { n:12, lbl:"SOS — Kid View (post-fire false-alarm window)" },
   { n:13, lbl:"Post-Join Welcome Splash" },
   { n:14, lbl:"First-Run Tooltip Tour (card 1 of 3)" },
   { n:15, lbl:"Friend Warning — tap Tyler in Members to reach this" },
   { n:16, lbl:"Extend Visit Sheet" },
   { n:17, lbl:"Friend Farewell Screen" },
   { n:18, lbl:"Location Permission Pre-prompt — shown after planting / joining a Tree" },
+  { n:19, lbl:"SOS — Hold-to-fire (pre-fire trigger UI; release cancels silently)" },
+  { n:20, lbl:"Settings → Leave Tree (self-removal confirmation)" },
+  { n:21, lbl:"App Lock — biometric gate on every launch (default ON)" },
 ];
 
 let cur = 1;
